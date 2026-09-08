@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+/* Tailwind v4: make the `dark:` variant respond to a class instead of only
+   the OS preference, so the theme toggle (next-themes) actually works. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---- Design tokens -------------------------------------------------- */
+/* Light theme (default values on :root) */
+:root {
+  --background: #fafafa;
+  --surface: #ffffff;
+  --surface-elevated: #f4f4f5;
+  --foreground: #18181b;
+  --muted: #71717a;
+  --border: #e4e4e7;
+  --accent: #0891b2;
+  --accent-foreground: #ffffff;
+  --glow: rgba(8, 145, 178, 0.28);
+  --danger: #b91c1c;
+}
+
+/* Dark theme (default aesthetic for this portfolio) */
+.dark {
+  --background: #09090b;
+  --surface: #111113;
+  --surface-elevated: #18181b;
+  --foreground: #f4f4f5;
+  --muted: #a1a1aa;
+  --border: #27272a;
+  --accent: #22d3ee;
+  --accent-foreground: #09090b;
+  --glow: rgba(34, 211, 238, 0.35);
+  --danger: #f87171;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-danger: var(--danger);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+/* Slim, theme-matched scrollbar (webkit browsers) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+  border: 2px solid var(--background);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+/* Reduced motion: collapse every animation/transition to instant. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Grão fixo sobre a página inteira, sutil, só pra tirar o "chapado" do
+   fundo escuro. Nunca aplicado em containers que rolam (ver layout.tsx). */
+.grain-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+}
+
+/* Grade de pontos decorativa atrás do Hero. */
+.dot-grid {
+  background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 60% 60% at 50% 40%, black, transparent);
+  -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 40%, black, transparent);
+}
+
+/* Continuous marquee used once, by the tech-stack strip. */
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee-scroll 32s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
