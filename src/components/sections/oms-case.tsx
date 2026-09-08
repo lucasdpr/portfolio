@@ -8,7 +8,7 @@ const chapters = [
   {
     icon: MapTrifold,
     title: "O problema",
-    body: "Na oficina de moldes e segmentos da CSN, cada inspeção e reparo de equipamento de lingotamento contínuo era registrado em papel. Sem histórico centralizado, sem rastreabilidade, sem visibilidade pra gerência acompanhar o que realmente acontece no chão de fábrica.",
+    body: "Na oficina de moldes e segmentos onde trabalho, cada inspeção e reparo de equipamento de lingotamento contínuo era registrado em papel. Sem histórico centralizado, sem rastreabilidade, sem visibilidade pra gerência acompanhar o que realmente acontece no chão de fábrica.",
   },
   {
     icon: Wrench,
