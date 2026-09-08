@@ -8,4 +8,4 @@
  * Trocando de hospedagem pra algo que serve na raiz (Vercel, domínio
  * próprio), é só mudar pra string vazia "" aqui.
  */
-export const BASE_PATH = "/portfolio";
+export const BASE_PATH = "";
