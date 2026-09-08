@@ -121,7 +121,7 @@ export const projects: Project[] = [
   {
     title: "OMS - Oficina de Moldes e Segmentos",
     description:
-      "Sistema de gestão de manutenção industrial para a Companhia Siderúrgica Nacional (CSN), com API em Python/FastAPI e front-end em PWA para uso em campo. Case completo mais abaixo.",
+      "Sistema de gestão de manutenção industrial para uma grande siderúrgica, com API em Python/FastAPI e front-end em PWA para uso em campo. Case completo mais abaixo.",
     tags: ["Python", "FastAPI", "PostgreSQL", "JavaScript", "PWA", "Render"],
     image: "https://picsum.photos/seed/oms-oficina-moldes/1400/1000",
     screenshot: "/projetos/oms.jpg",
@@ -176,13 +176,13 @@ export const timeline: TimelineItem[] = [
   {
     period: "mar/2024 - dez/2024",
     title: "Mecânico Júnior",
-    place: "CBSI (Grupo CSN), Volta Redonda - RJ",
+    place: "Indústria siderúrgica, Volta Redonda - RJ",
     description: "Manutenção preventiva e corretiva de máquinas e equipamentos na aciaria e oficina de moldes e segmentos.",
   },
   {
     period: "dez/2024 - Atual",
     title: "Mecânico de Manutenção",
-    place: "CBSI (Grupo CSN), Volta Redonda - RJ",
+    place: "Indústria siderúrgica, Volta Redonda - RJ",
     description:
       "Promovido após 9 meses na função anterior. Foi vendo de perto os checklists em papel que nasceu a ideia do sistema OMS.",
   },
