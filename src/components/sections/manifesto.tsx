@@ -4,13 +4,15 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
 
 const text =
-  "Não faço só telas bonitas. Construo ferramentas que as pessoas usam todo dia: sistemas que funcionam sem internet, painéis que respondem perguntas e sites que trazem clientes de verdade.";
+  "Não faço só telas bonitas. Construo ferramentas feitas pra usar todo dia: sistemas que funcionam sem internet, painéis que respondem perguntas e sites que trazem clientes de verdade.";
 
 // Palavras que ganham o gradiente quando acendem.
 const highlighted = new Set(["ferramentas", "todo", "dia:", "clientes", "verdade."]);
 
 function Word({ children, progress, range }: { children: string; progress: MotionValue<number>; range: [number, number] }) {
-  const opacity = useTransform(progress, range, [0.12, 1]);
+  // Por função, não keyframes: evita a aceleração nativa (ScrollTimeline)
+  // do motion, que calcula errado a opacidade ligada à rolagem.
+  const opacity = useTransform(progress, (v) => 0.12 + 0.88 * Math.min(1, Math.max(0, (v - range[0]) / (range[1] - range[0]))));
   const y = useTransform(progress, range, [8, 0]);
   const isHighlight = highlighted.has(children);
 

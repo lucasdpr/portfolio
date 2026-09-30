@@ -103,6 +103,7 @@ export const skillCategories: SkillCategory[] = [
       { name: "Node.js", slug: "nodedotjs" },
       { name: "PostgreSQL", slug: "postgresql" },
       { name: "Neon", slug: "neon" },
+      { name: "Pandas", slug: "pandas" },
       { name: "Supabase", slug: "supabase" },
       { name: "MySQL", slug: "mysql" },
     ],
@@ -128,12 +129,12 @@ export const skillCategories: SkillCategory[] = [
 export const projects: Project[] = [
   {
     title: "OMS - Oficina de Moldes e Segmentos",
-    headline: "Gestão de manutenção industrial, do chão de fábrica à gerência.",
+    headline: "Controle total da manutenção, do chão de fábrica à gerência.",
     description:
-      "Sistema de gestão de manutenção com API em Python/FastAPI, PostgreSQL e front-end PWA para registrar inspeções e reparos direto no celular, com histórico completo e rastreabilidade de cada equipamento.",
+      "Plataforma de gestão da manutenção de moldes e segmentos de lingotamento contínuo: painel em tempo real do desgaste de cada peça, sinótico 3D das máquinas, checklists digitais com laudo em PDF, troca guiada por peça reserva, prontuário, auditoria e notificações push. Instala no celular e funciona offline.",
     category: "sistema",
     year: "2026",
-    tags: ["Python", "FastAPI", "PostgreSQL", "JavaScript", "PWA", "Render"],
+    tags: ["Python", "FastAPI", "PostgreSQL", "Neon", "Pandas", "JavaScript", "Three.js", "PWA", "Web Push", "Render"],
     screenshot: "/projetos/oms.jpg",
     liveUrl: "https://lucasdpr.github.io/oficina-oms/",
     featured: true,
@@ -145,7 +146,7 @@ export const projects: Project[] = [
       "PWA que acompanha ordens de manutenção a partir das planilhas exportadas do SAP: detecta mudanças a cada importação, aponta o que precisa ser cobrado e organiza o follow-up de fornecedores. Tem dashboard com KPIs e gráficos, assistente de IA que consulta o banco, notificações push e perfis de acesso.",
     category: "sistema",
     year: "2026",
-    tags: ["Next.js", "TypeScript", "PostgreSQL", "Recharts", "IA", "Web Push"],
+    tags: ["Next.js", "React", "TypeScript", "PostgreSQL", "Neon", "Tailwind CSS", "Recharts", "ExcelJS", "IA", "Web Push", "Vercel"],
     screenshot: "/projetos/abastecimento.jpg",
     featured: true,
   },
@@ -156,7 +157,7 @@ export const projects: Project[] = [
       "PWA offline-first que digitaliza quatro fichas de inspeção de máquinas de lingotamento contínuo, com alerta visual para medidas fora da tolerância. Salva no aparelho (IndexedDB) com fila de sincronização e gera o PDF oficial no servidor.",
     category: "sistema",
     year: "2026",
-    tags: ["Next.js", "TypeScript", "Supabase", "IndexedDB", "PWA", "pdf-lib"],
+    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase", "Dexie.js", "PWA", "pdf-lib", "Zod", "Zustand"],
     screenshot: "/projetos/passe-line.jpg",
   },
   {
@@ -185,13 +186,13 @@ export const projects: Project[] = [
     liveUrl: "https://oficinadoar.xyz",
   },
   {
-    title: "Brasa da Vila",
-    headline: "Cardápio digital rápido para restaurante.",
+    title: "Brasa da Vila (demo)",
+    headline: "Cardápio digital com pedido direto no WhatsApp.",
     description:
-      "Plataforma web para restaurante com cardápio interativo, com foco em carregamento rápido e boa experiência para o cliente no celular.",
+      "Demo que criei para apresentar a restaurantes e lanchonetes: cardápio interativo com carrinho que monta o pedido e envia pelo WhatsApp. A marca é fictícia, mas o site é completo e funcional.",
     category: "site",
-    year: "2025",
-    tags: ["HTML5", "CSS3", "JavaScript"],
+    year: "2026",
+    tags: ["HTML5", "CSS3", "JavaScript", "GitHub Pages"],
     screenshot: "/projetos/brasa-da-vila.jpg",
     liveUrl: "https://lucasdpr.github.io/Catalogo-de-Apresentacao/",
   },
@@ -231,3 +232,30 @@ export const timeline: TimelineItem[] = [
     description: "Conclusão prevista para 2027. Estudo à noite o que aplico de dia na oficina, e vice-versa.",
   },
 ];
+
+/**
+ * Roteiro da vitrine (seção "Em destaque", estilo página de produto): o
+ * notebook 3D mostra estas telas da OMS, na ordem, conforme a rolagem.
+ * Os prints ficam em `public/projetos/`; tela sem arquivo é pulada.
+ */
+export const omsShowcase = {
+  name: "OMS",
+  tagline: "Gestão inteligente da manutenção.",
+  screens: [
+    {
+      image: "/projetos/oms-painel.jpg",
+      title: "Tudo o que importa, numa tela.",
+      text: "Ativos críticos, tonelagem do dia e risco de cada peça, direto do banco de dados.",
+    },
+    {
+      image: "/projetos/oms-inspecao.jpg",
+      title: "Sabe o que inspecionar primeiro.",
+      text: "Fila de inspeção por desgaste, risco médio por veio e produção lançada por máquina.",
+    },
+    {
+      image: "/projetos/oms-veios.jpg",
+      title: "Cada peça, em cada posição.",
+      text: "Onde cada molde e segmento está instalado, quanto já rodou e quanto falta pro limite. Trocar pela reserva é uma ação só.",
+    },
+  ],
+};

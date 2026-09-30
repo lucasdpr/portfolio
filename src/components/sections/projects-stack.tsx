@@ -24,7 +24,11 @@ function StackCard({ project, index, total, progress }: CardProps) {
   const targetScale = 1 - (total - 1 - index) * 0.04;
   const start = index / total;
   const scale = useTransform(progress, [start, 1], [1, targetScale]);
-  const dim = useTransform(progress, [start, Math.min(1, start + 2 / total)], [0, index === total - 1 ? 0 : 0.35]);
+  const dimEnd = Math.min(1, start + 2 / total);
+  // Opacidade por função: evita a aceleração nativa do motion (ScrollTimeline).
+  const dim = useTransform(progress, (v) =>
+    index === total - 1 ? 0 : 0.35 * Math.min(1, Math.max(0, (v - start) / (dimEnd - start))),
+  );
   const mainUrl = project.liveUrl ?? project.repoUrl;
 
   const visual = (
