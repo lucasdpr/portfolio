@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, type PointerEvent } from "react";
 import dynamic from "next/dynamic";
-import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { AnimatePresence, motion, useInView, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { ArrowDown, ArrowRight, EnvelopeSimple } from "@phosphor-icons/react";
 import { Magnetic } from "@/components/ui/magnetic-button";
 import { Reveal } from "@/components/ui/reveal";
@@ -55,10 +55,12 @@ export function Hero() {
   const introDone = useIntroDone();
   const sectionRef = useRef<HTMLElement>(null);
   const spotRef = useRef<HTMLDivElement>(null);
+  const heroVisible = useInView(sectionRef);
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
   // Parallax: ao rolar, o texto sobe mais rápido e some; a cena 3D afunda.
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "-35%"]);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  // Opacidade por função: evita a aceleração nativa do motion (ScrollTimeline).
+  const textOpacity = useTransform(scrollYProgress, (v) => 1 - Math.min(1, v / 0.7));
   const sceneY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
   const sceneScale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
 
@@ -164,7 +166,7 @@ export function Hero() {
           transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="relative h-[340px] sm:h-[440px] lg:h-[580px]"
         >
-          <HeroScene />
+          <HeroScene active={heroVisible} />
         </motion.div>
       </div>
 

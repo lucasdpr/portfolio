@@ -26,7 +26,7 @@ export function Projects() {
           </div>
           <Reveal delay={0.1}>
             <p className="max-w-sm text-muted">
-              De sistemas internos com dashboard e IA a sites para clientes reais. Todos saíram do papel e estão em uso.
+              De sistemas para a manutenção de uma siderúrgica a sites para pequenos negócios.
             </p>
           </Reveal>
         </div>

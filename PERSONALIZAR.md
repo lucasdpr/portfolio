@@ -77,6 +77,9 @@ route do Next.js — me chama quando quiser fazer essa parte.
   Para tirar, remova `<Preloader />` de `src/app/layout.tsx`.
 - Rolagem suave: `src/components/ui/smooth-scroll.tsx` (Lenis).
 - Frase do manifesto: `src/components/sections/manifesto.tsx`.
+- Vitrine da OMS (notebook 3D que abre com a rolagem): textos e prints em
+  `omsShowcase`, no fim de `src/lib/data.ts`. Para trocar uma tela, salve o
+  print em 16:10 em `public/projetos/` e aponte o caminho lá.
 - Todos os efeitos respeitam "reduzir movimento" do sistema operacional.
 
 ## 8. Rodando o projeto

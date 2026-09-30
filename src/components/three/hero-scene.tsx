@@ -112,9 +112,11 @@ function PointerRig({ children }: { children: ReactNode }) {
  * servidor) — por isso é importada com `next/dynamic({ ssr: false })` em
  * `hero.tsx`, nunca diretamente.
  */
-export function HeroScene() {
+export function HeroScene({ active = true }: { active?: boolean }) {
   return (
     <Canvas
+      // Fora da tela, para de renderizar (economiza bateria/GPU).
+      frameloop={active ? "always" : "never"}
       dpr={[1, 1.5]}
       camera={{ position: [0, 0, 6], fov: 45 }}
       gl={{ antialias: true, alpha: true }}
