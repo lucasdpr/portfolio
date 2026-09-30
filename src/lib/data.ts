@@ -65,9 +65,8 @@ export const profile = {
   firstName: "Lucas",
   role: "Desenvolvedor Full Stack",
   tagline: "Transformo processos feitos no papel e em planilhas em sistemas web, APIs e apps que funcionam offline, com Python, FastAPI, Next.js e PostgreSQL.",
-  // Baseado no "Perfil" do currículo (resume.pdf), escrito pelo próprio Lucas.
-  bio: "Entrei na indústria como mecânico, aprendi a programar por conta própria e passei a resolver com software os problemas que eu via no chão de fábrica. Hoje curso Engenharia de Software e busco minha primeira vaga como desenvolvedor júnior, num time onde eu possa aprender rápido e contribuir desde o início.",
-  lookingFor: "Primeira vaga como desenvolvedor júnior",
+  bio: "Sou desenvolvedor full stack e levo um projeto da conversa com quem vai usar até o sistema no ar: modelagem do banco, API, interface e deploy. A manutenção industrial me ensinou a trabalhar em equipe, com responsabilidade e atenção a cada detalhe. É com essa mesma dedicação que quero somar a um time de desenvolvimento.",
+  lookingFor: "Vaga como desenvolvedor full stack",
   education: "Engenharia de Software · 6º período (conclusão em 2027)",
   location: "Barra Mansa - RJ, Brasil",
   email: "lucasgrafael05@gmail.com",
@@ -78,19 +77,19 @@ export const profile = {
   mainStack: ["Python", "FastAPI", "Next.js", "React", "TypeScript", "PostgreSQL"],
 };
 
-/** "Por que me chamar": os diferenciais que aparecem na seção Sobre. */
+/** "O que eu trago pro time": os diferenciais que aparecem na seção Sobre. */
 export const strengths = [
   {
-    title: "Entendo o problema antes do código",
-    text: "Construí sistemas para processos que eu mesmo executo. Modelo o banco e as telas a partir do trabalho real, não de suposições.",
+    title: "Entrega de ponta a ponta",
+    text: "Banco, API, interface e deploy. Já coloquei sistemas no ar com FastAPI, PostgreSQL, Next.js, Render e Vercel.",
   },
   {
-    title: "Do banco de dados ao deploy",
-    text: "API, banco, interface e publicação no ar: FastAPI, PostgreSQL, Next.js, Render e Vercel.",
+    title: "Foco no problema de quem usa",
+    text: "Entendo o processo antes de escrever código. Foi assim que nasceram a OMS, a Central de Abastecimento e o Pass-Line.",
   },
   {
-    title: "Disciplina de operação crítica",
-    text: "Venho de um ambiente onde uma parada de máquina custa caro. Trago esse cuidado e essa responsabilidade pro código que entrego.",
+    title: "Responsabilidade e dedicação",
+    text: "Venho de uma operação industrial onde erro custa caro. Levo essa seriedade e esse esforço pro time em que eu entrar.",
   },
 ];
 

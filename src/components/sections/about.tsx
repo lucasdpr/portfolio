@@ -5,7 +5,7 @@ import { SectionLabel } from "@/components/ui/scramble-text";
 import { WordReveal } from "@/components/ui/word-reveal";
 import { profile, strengths } from "@/lib/data";
 
-const strengthIcons = [MagnifyingGlass, Stack, ShieldCheck];
+const strengthIcons = [Stack, MagnifyingGlass, ShieldCheck];
 
 /**
  * Responde, nessa ordem, o que o recrutador quer saber: quem é, o que
@@ -13,7 +13,7 @@ const strengthIcons = [MagnifyingGlass, Stack, ShieldCheck];
  */
 export function About() {
   const facts = [
-    { label: "Procurando", value: profile.lookingFor },
+    { label: "Objetivo", value: profile.lookingFor },
     { label: "Formação", value: profile.education },
     { label: "Local", value: profile.location },
   ];
@@ -29,7 +29,7 @@ export function About() {
           <SectionLabel index="03" text="sobre mim" />
           <WordReveal
             className="text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl"
-            words={["Mecânico", "de", "formação,", { text: "desenvolvedor", className: "text-gradient" }, { text: "por", className: "text-gradient" }, { text: "escolha.", className: "text-gradient" }]}
+            words={["Sei", "construir.", { text: "Sei", className: "text-gradient" }, { text: "trabalhar.", className: "text-gradient" }]}
           />
           <Reveal delay={0.1}>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">{profile.bio}</p>
@@ -47,7 +47,7 @@ export function About() {
           </Reveal>
 
           <Reveal delay={0.2}>
-            <h3 className="mt-12 font-mono text-xs uppercase tracking-[0.2em] text-accent">Por que me chamar</h3>
+            <h3 className="mt-12 font-mono text-xs uppercase tracking-[0.2em] text-accent">O que eu trago pro time</h3>
             <ul className="mt-5 space-y-5">
               {strengths.map((strength, index) => {
                 const Icon = strengthIcons[index % strengthIcons.length];
