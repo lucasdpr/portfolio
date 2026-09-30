@@ -65,8 +65,10 @@ export const profile = {
   firstName: "Lucas",
   role: "Desenvolvedor Full Stack",
   tagline: "Transformo processos feitos no papel e em planilhas em sistemas web, APIs e apps que funcionam offline, com Python, FastAPI, Next.js e PostgreSQL.",
-  bio: "Sou desenvolvedor full stack e levo um projeto da conversa com quem vai usar até o sistema no ar: modelagem do banco, API, interface e deploy. A manutenção industrial me ensinou a trabalhar em equipe, com responsabilidade e atenção a cada detalhe. É com essa mesma dedicação que quero somar a um time de desenvolvimento.",
-  lookingFor: "Vaga como desenvolvedor full stack",
+  bio: [
+    "Trabalho na manutenção de uma siderúrgica e construí sistemas para os problemas da minha própria área: uma API com 120 endpoints, um painel em cima do SAP com assistente de IA e um app de medição que funciona sem internet.",
+    "Quero fazer isso em tempo integral, num time de desenvolvimento.",
+  ],
   education: "Engenharia de Software · 6º período (conclusão em 2027)",
   location: "Barra Mansa - RJ, Brasil",
   email: "lucasgrafael05@gmail.com",
@@ -76,22 +78,6 @@ export const profile = {
   /** Tecnologias em destaque no topo da página (o que o recrutador lê primeiro). */
   mainStack: ["Python", "FastAPI", "Next.js", "React", "TypeScript", "PostgreSQL"],
 };
-
-/** "O que eu trago pro time": os diferenciais que aparecem na seção Sobre. */
-export const strengths = [
-  {
-    title: "Entrega de ponta a ponta",
-    text: "Banco, API, interface e deploy. Já coloquei sistemas no ar com FastAPI, PostgreSQL, Next.js, Render e Vercel.",
-  },
-  {
-    title: "Foco no problema de quem usa",
-    text: "Entendo o processo antes de escrever código. Foi assim que nasceram a OMS, a Central de Abastecimento e o Pass-Line.",
-  },
-  {
-    title: "Responsabilidade e dedicação",
-    text: "Venho de uma operação industrial onde erro custa caro. Levo essa seriedade e esse esforço pro time em que eu entrar.",
-  },
-];
 
 export const socialLinks: SocialLink[] = [
   { label: "GitHub", href: "https://github.com/lucasdpr", slug: "github" },
