@@ -67,7 +67,7 @@ export const profile = {
   tagline: "Transformo processos feitos no papel e em planilhas em sistemas web, APIs e apps que funcionam offline, com Python, FastAPI, Next.js e PostgreSQL.",
   bio: [
     "Construí sistemas completos para a manutenção de uma siderúrgica: uma API com 120 endpoints, um painel em cima do SAP com assistente de IA e um app de medição que funciona sem internet.",
-    "Quero fazer isso em tempo integral, num time de desenvolvimento.",
+    "Disponível para vagas de desenvolvimento full stack.",
   ],
   education: "Engenharia de Software · 6º período (conclusão em 2027)",
   location: "Barra Mansa - RJ, Brasil",

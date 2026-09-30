@@ -7,11 +7,13 @@ import { profile, projects, socialLinks } from "@/lib/data";
 
 /** Sobre curto: quem é, o que já fez (em fatos) e o que quer. Sem adjetivos. */
 export function About() {
+  const systems = projects.filter((project) => project.category === "sistema").length;
+  const sites = projects.filter((project) => project.category === "site").length;
   const facts = [
     // Contado no código da API da OMS (routers/*.py: 52 GET + 68 POST).
     { value: "120", label: "endpoints na API da OMS" },
-    { value: String(projects.filter((project) => project.category === "sistema").length), label: "sistemas completos" },
-    { value: String(projects.filter((project) => project.liveUrl).length), label: "projetos publicados" },
+    { value: String(projects.length), label: `projetos: ${systems} sistemas e ${sites} sites` },
+    { value: String(projects.filter((project) => project.liveUrl).length), label: "projetos no ar" },
     { value: "2027", label: "formatura em Eng. de Software" },
   ];
   const linkedin = socialLinks.find((link) => link.slug === "linkedin")?.href;
