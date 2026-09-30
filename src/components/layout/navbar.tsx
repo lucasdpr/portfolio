@@ -8,9 +8,9 @@ import { Magnetic } from "@/components/ui/magnetic-button";
 import { profile } from "@/lib/data";
 
 const links = [
-  { href: "#sobre", label: "Sobre" },
-  { href: "#habilidades", label: "Habilidades" },
   { href: "#projetos", label: "Projetos" },
+  { href: "#habilidades", label: "Habilidades" },
+  { href: "#sobre", label: "Sobre" },
   { href: "#skills", label: "Stack" },
   { href: "#trajetoria", label: "Trajetória" },
 ];
