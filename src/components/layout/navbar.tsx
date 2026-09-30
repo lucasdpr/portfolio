@@ -9,7 +9,7 @@ import { profile } from "@/lib/data";
 
 const links = [
   { href: "#sobre", label: "Sobre" },
-  { href: "#servicos", label: "Serviços" },
+  { href: "#habilidades", label: "Habilidades" },
   { href: "#projetos", label: "Projetos" },
   { href: "#skills", label: "Stack" },
   { href: "#trajetoria", label: "Trajetória" },

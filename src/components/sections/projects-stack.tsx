@@ -43,14 +43,14 @@ function StackCard({ project, index, total, progress }: CardProps) {
   );
 
   return (
-    <div className="lg:sticky lg:h-[calc(100svh-7rem)]" style={{ top: `calc(6rem + ${index * 1.25}rem)` }}>
+    <div className="stack-item" style={{ top: `calc(5.5rem + ${index * 1.1}rem)` }}>
       <motion.article
         style={reduceMotion ? undefined : { scale }}
-        className={`group relative origin-top overflow-hidden rounded-[2rem] border border-border bg-surface p-5 shadow-2xl shadow-black/30 sm:p-8 ${
+        className={`group relative origin-top overflow-hidden rounded-[2rem] border border-border bg-surface p-5 shadow-2xl shadow-black/30 sm:p-7 ${
           project.featured ? "glow-border" : ""
         }`}
       >
-        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[1.35fr_1fr] lg:gap-12">
+        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[1.15fr_1fr] lg:gap-10">
           <div data-cursor={mainUrl ? "Abrir" : undefined}>
             {mainUrl ? (
               <a href={mainUrl} target="_blank" rel="noreferrer" aria-label={`Abrir ${project.title}`} className="block">
@@ -70,11 +70,24 @@ function StackCard({ project, index, total, progress }: CardProps) {
               <span>{project.year}</span>
             </div>
 
-            <h3 className="mt-5 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">{project.title}</h3>
-            <p className="mt-3 text-lg font-medium text-foreground/80">{project.headline}</p>
-            <p className="mt-4 text-sm leading-relaxed text-muted sm:text-base">{project.description}</p>
+            <h3 className="mt-4 text-2xl font-bold tracking-tight text-foreground">{project.title}</h3>
+            <p className="mt-2 text-base font-medium text-foreground/80">{project.headline}</p>
+            {project.problem ? (
+              <dl className="mt-4 space-y-3 border-l-2 border-border pl-4">
+                <div>
+                  <dt className="font-mono text-[11px] uppercase tracking-wider text-accent-3">O problema</dt>
+                  <dd className="mt-1 text-sm leading-relaxed text-muted">{project.problem}</dd>
+                </div>
+                <div>
+                  <dt className="font-mono text-[11px] uppercase tracking-wider text-accent">O que eu construí</dt>
+                  <dd className="mt-1 text-sm leading-relaxed text-muted">{project.description}</dd>
+                </div>
+              </dl>
+            ) : (
+              <p className="mt-4 text-sm leading-relaxed text-muted">{project.description}</p>
+            )}
 
-            <div className="mt-6 flex flex-wrap gap-2">
+            <div className="mt-5 flex flex-wrap gap-1.5">
               {project.tags.map((tag) => (
                 <span key={tag} className="rounded-full border border-border bg-background/60 px-3 py-1 font-mono text-[11px] text-muted">
                   {tag}
@@ -82,7 +95,7 @@ function StackCard({ project, index, total, progress }: CardProps) {
               ))}
             </div>
 
-            <div className="mt-8 flex flex-wrap items-center gap-5 text-sm font-medium">
+            <div className="mt-6 flex flex-wrap items-center gap-5 text-sm font-medium">
               {project.liveUrl && (
                 <a
                   href={project.liveUrl}
@@ -125,7 +138,7 @@ export function ProjectsStack({ projects }: { projects: ResolvedProject[] }) {
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end end"] });
 
   return (
-    <div ref={containerRef} className="mt-14 space-y-8 lg:space-y-0">
+    <div ref={containerRef} className="mt-14">
       {projects.map((project, index) => (
         <StackCard key={project.title} project={project} index={index} total={projects.length} progress={scrollYProgress} />
       ))}

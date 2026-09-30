@@ -205,7 +205,6 @@ function ChatDemo() {
           <Robot size={15} weight="bold" />
         </span>
         <span className="text-sm font-medium text-foreground">Assistente</span>
-        <span className="ml-auto font-mono text-[10px] uppercase tracking-wider text-muted">demonstração</span>
       </div>
       <AnimatePresence>
         {showQuestion && (
@@ -247,12 +246,15 @@ type ServiceCardProps = {
   icon: ReactNode;
   title: string;
   description: string;
+  /** Projetos reais do portfólio onde a habilidade foi aplicada. */
+  usedIn: string[];
+  stack: string[];
   demo: ReactNode;
   className?: string;
   horizontal?: boolean;
 };
 
-function ServiceCard({ icon, title, description, demo, className = "", horizontal = false }: ServiceCardProps) {
+function ServiceCard({ icon, title, description, usedIn, stack, demo, className = "", horizontal = false }: ServiceCardProps) {
   return (
     <SpotlightCard
       className={`h-full overflow-hidden rounded-3xl border border-border bg-surface p-6 transition-colors duration-500 hover:border-accent/40 sm:p-8 ${className}`}
@@ -264,8 +266,20 @@ function ServiceCard({ icon, title, description, demo, className = "", horizonta
           </span>
           <h3 className="mt-5 text-2xl font-semibold tracking-tight text-foreground">{title}</h3>
           <p className="mt-3 leading-relaxed text-muted">{description}</p>
+          <p className="mt-5 font-mono text-[11px] uppercase tracking-wider text-muted">Onde apliquei</p>
+          <p className="mt-1.5 text-sm font-medium text-foreground">{usedIn.join(" · ")}</p>
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            {stack.map((tech) => (
+              <span key={tech} className="rounded-full border border-border bg-background/60 px-2.5 py-0.5 font-mono text-[11px] text-muted">
+                {tech}
+              </span>
+            ))}
+          </div>
         </div>
-        <div className={`flex-1 ${horizontal ? "md:w-3/5" : ""}`}>{demo}</div>
+        <div className={`flex-1 ${horizontal ? "md:w-3/5" : ""}`}>
+          <p className="mb-2 text-right font-mono text-[10px] uppercase tracking-wider text-muted/70">ilustração</p>
+          {demo}
+        </div>
       </div>
     </SpotlightCard>
   );
@@ -273,14 +287,17 @@ function ServiceCard({ icon, title, description, demo, className = "", horizonta
 
 export function Services() {
   return (
-    <section id="servicos" className="border-t border-border py-28">
+    <section id="habilidades" className="border-t border-border py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl">
-          <SectionLabel index="02" text="o que eu faço" />
+          <SectionLabel index="02" text="habilidades" />
           <WordReveal
             className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl"
-            words={["Do", "painel", "interno", "ao", "site", "que", { text: "vende.", className: "text-gradient" }]}
+            words={["O", "que", "eu", "sei", { text: "fazer.", className: "text-gradient" }]}
           />
+          <Reveal delay={0.1}>
+            <p className="mt-4 text-muted">Cada habilidade abaixo está aplicada num projeto real deste portfólio.</p>
+          </Reveal>
         </div>
 
         <div className="mt-14 grid grid-cols-1 gap-4 lg:grid-cols-3">
@@ -288,24 +305,30 @@ export function Services() {
             <ServiceCard
               horizontal
               icon={<ChartBar size={20} weight="bold" />}
-              title="Sistemas sob medida"
-              description="Painéis, cadastros e relatórios construídos em cima do seu processo, com banco de dados de verdade e acesso por perfil."
+              title="Sistemas completos, do banco à interface"
+              description="API REST, banco relacional, painéis com indicadores, auditoria e controle de acesso por perfil."
+              usedIn={["OMS", "Central de Abastecimento"]}
+              stack={["FastAPI", "Next.js", "PostgreSQL", "Recharts"]}
               demo={<DashboardDemo />}
             />
           </Reveal>
           <Reveal delay={0.1}>
             <ServiceCard
               icon={<WifiSlash size={20} weight="bold" />}
-              title="Funciona sem internet"
-              description="PWAs que salvam no aparelho e sincronizam sozinhos quando o sinal volta. Instala no celular como app."
+              title="Apps que funcionam offline"
+              description="PWAs instaláveis que salvam os dados no aparelho e sincronizam quando a conexão volta."
+              usedIn={["Pass-Line", "OMS"]}
+              stack={["Service Worker", "Dexie.js", "Supabase"]}
               demo={<OfflineDemo />}
             />
           </Reveal>
           <Reveal>
             <ServiceCard
               icon={<DeviceMobile size={20} weight="bold" />}
-              title="Sites que trazem clientes"
-              description="Rápidos no celular, com contato direto pelo WhatsApp e pensados para aparecer no Google."
+              title="Sites responsivos"
+              description="Sites e catálogos pensados primeiro pro celular, com contato direto pelo WhatsApp."
+              usedIn={["RTS EPI", "Oficina do Ar", "Brasa da Vila"]}
+              stack={["HTML", "CSS", "JavaScript"]}
               demo={<PhoneDemo />}
             />
           </Reveal>
@@ -313,8 +336,10 @@ export function Services() {
             <ServiceCard
               horizontal
               icon={<Robot size={20} weight="bold" />}
-              title="IA dentro do sistema"
-              description="Assistente que responde perguntas consultando o seu banco de dados. Não inventa: busca a informação no banco antes de responder."
+              title="IA integrada ao sistema"
+              description="Assistente que responde consultando o banco de dados: busca por número de ordem, pedido, material ou fornecedor."
+              usedIn={["Central de Abastecimento"]}
+              stack={["LLM (API compatível com OpenAI)", "PostgreSQL"]}
               demo={<ChatDemo />}
             />
           </Reveal>

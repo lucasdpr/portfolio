@@ -8,10 +8,11 @@ import { profile, projects, skillCategories } from "@/lib/data";
 
 export function About() {
   const stats = [
-    { value: projects.length, suffix: "", label: "projetos entregues" },
     { value: projects.filter((project) => project.category === "sistema").length, suffix: "", label: "sistemas completos" },
-    { value: projects.filter((project) => project.liveUrl).length, suffix: "", label: "no ar agora" },
-    { value: skillCategories.flatMap((category) => category.items).length, suffix: "+", label: "tecnologias" },
+    { value: projects.filter((project) => project.liveUrl).length, suffix: "", label: "projetos publicados" },
+    // Contado no código da API da OMS (routers/*.py: 52 GET + 68 POST).
+    { value: 120, suffix: "", label: "endpoints na API da OMS" },
+    { value: skillCategories.flatMap((category) => category.items).length, suffix: "", label: "tecnologias que uso" },
   ];
 
   const facts = [

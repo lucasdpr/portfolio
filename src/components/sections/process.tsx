@@ -8,7 +8,7 @@ const steps = [
   {
     icon: MagnifyingGlass,
     title: "Entender",
-    description: "Converso com quem vai usar e entendo o processo de verdade antes de escrever a primeira linha.",
+    description: "Converso com quem vai usar e entendo o processo de verdade antes de escrever a primeira linha de código.",
   },
   {
     icon: Notebook,
@@ -18,7 +18,7 @@ const steps = [
   {
     icon: Code,
     title: "Construir",
-    description: "Entregas curtas e testadas, com você vendo o progresso de perto em vez de esperar meses por uma surpresa.",
+    description: "Entregas pequenas, versionadas no Git e testadas, validando com quem usa a cada etapa.",
   },
   {
     icon: RocketLaunch,
