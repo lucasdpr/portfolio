@@ -166,7 +166,7 @@ export function Hero() {
           transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="relative h-[340px] sm:h-[440px] lg:h-[580px]"
         >
-          <HeroScene active={heroVisible} />
+          <HeroScene active={heroVisible} name={profile.firstName} />
         </motion.div>
       </div>
 

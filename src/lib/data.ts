@@ -234,9 +234,11 @@ export const timeline: TimelineItem[] = [
 ];
 
 /**
- * Roteiro da vitrine (seção "Em destaque", estilo página de produto): o
- * notebook 3D mostra estas telas da OMS, na ordem, conforme a rolagem.
- * Os prints ficam em `public/projetos/`; tela sem arquivo é pulada.
+ * Roteiro da vitrine imersiva da OMS (seção "Em destaque"): a tela do
+ * sistema cresce até ocupar a tela inteira e passa por estas telas
+ * conforme a rolagem. `hotspots` marcam partes reais da interface, em %
+ * da imagem (x da esquerda, y do topo). Prints em `public/projetos/`
+ * (16:10); tela sem arquivo é pulada.
  */
 export const omsShowcase = {
   name: "OMS",
@@ -246,16 +248,37 @@ export const omsShowcase = {
       image: "/projetos/oms-painel.jpg",
       title: "Tudo o que importa, numa tela.",
       text: "Ativos críticos, tonelagem do dia e risco de cada peça, direto do banco de dados.",
+      hotspots: [
+        { x: 14, y: 50, label: "Ativos críticos em tempo real" },
+        { x: 49, y: 24, label: "Instala no celular e funciona offline" },
+        { x: 81, y: 58, label: "Ativos monitorados e sincronizados" },
+      ],
     },
     {
       image: "/projetos/oms-inspecao.jpg",
       title: "Sabe o que inspecionar primeiro.",
       text: "Fila de inspeção por desgaste, risco médio por veio e produção lançada por máquina.",
+      hotspots: [
+        { x: 62, y: 17, label: "Fila priorizada por desgaste" },
+        { x: 22, y: 56, label: "Risco médio por veio" },
+        { x: 83, y: 56, label: "Produção por máquina" },
+      ],
     },
     {
       image: "/projetos/oms-veios.jpg",
       title: "Cada peça, em cada posição.",
-      text: "Onde cada molde e segmento está instalado, quanto já rodou e quanto falta pro limite. Trocar pela reserva é uma ação só.",
+      text: "Onde cada molde e segmento está instalado, quanto já rodou e quanto falta pro limite.",
+      hotspots: [
+        { x: 50, y: 14, label: "Todos os veios, um clique" },
+        { x: 29, y: 46, label: "Desgaste acumulado da peça" },
+        { x: 50, y: 55, label: "Troca pela reserva em uma ação" },
+      ],
     },
+  ],
+  stats: [
+    { value: 15, suffix: "+", label: "módulos no sistema" },
+    { value: 3, suffix: "", label: "máquinas de lingotamento" },
+    { value: 6, suffix: "", label: "veios monitorados" },
+    { value: 344, suffix: "", label: "ativos rastreados" },
   ],
 };
