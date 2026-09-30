@@ -36,6 +36,8 @@ export type Project = {
    * Opcional: enquanto o arquivo não existir em `public/projetos/`, o card
    * mostra uma arte gerada no próprio site em vez de uma foto aleatória. */
   screenshot?: string;
+  /** O problema real que o projeto resolveu (aparece antes da solução). */
+  problem?: string;
   liveUrl?: string;
   repoUrl?: string;
   /** Card maior no topo da grade. */
@@ -60,14 +62,16 @@ export const profile = {
   fullName: "Lucas Gabriel de Paula Rafael",
   firstName: "Lucas",
   role: "Desenvolvedor Full Stack",
-  tagline: "Crio sistemas web, PWAs e sites sob medida: de painéis com IA e apps que funcionam offline a sites que trazem clientes para negócios locais.",
-  bio: "Desenvolvo sistemas web de ponta a ponta, do banco de dados à interface. Já entreguei desde painéis de dados com assistente de IA e aplicativos que funcionam offline até catálogos digitais e sites institucionais para clientes reais. Estudo Engenharia de Software e aplico na prática o que aprendo em sala, construindo projetos que clientes usam de verdade. Meu foco é entregar código limpo, performático e que resolve o problema do usuário antes de tudo.",
+  tagline: "Transformo processos feitos no papel e em planilhas em sistemas web, APIs e apps que funcionam offline, com Python, FastAPI, Next.js e PostgreSQL.",
+  bio: "Sou desenvolvedor full stack e estudo Engenharia de Software. Também trabalho na manutenção de uma siderúrgica, e é de lá que vêm meus principais projetos: vi o problema de perto e escrevi o software que resolve. Construí a OMS (API em FastAPI com 120 endpoints, PostgreSQL e PWA), um painel em Next.js que acompanha ordens do SAP com assistente de IA e um app de medição que funciona sem internet. Também desenvolvo sites para clientes.",
   education: "Engenharia de Software - 6º período",
   location: "Barra Mansa - RJ, Brasil",
   email: "lucasgrafael05@gmail.com",
   whatsapp: "5524999597969",
   resumeUrl: `${BASE_PATH}/resume.pdf`,
   availableForWork: true,
+  /** Tecnologias em destaque no topo da página (o que o recrutador lê primeiro). */
+  mainStack: ["Python", "FastAPI", "Next.js", "React", "TypeScript", "PostgreSQL"],
 };
 
 export const socialLinks: SocialLink[] = [
@@ -101,6 +105,8 @@ export const skillCategories: SkillCategory[] = [
       { name: "Python", slug: "python" },
       { name: "FastAPI", slug: "fastapi" },
       { name: "Node.js", slug: "nodedotjs" },
+      { name: "Express", slug: "express" },
+      { name: "Java", slug: "openjdk" },
       { name: "PostgreSQL", slug: "postgresql" },
       { name: "Neon", slug: "neon" },
       { name: "Pandas", slug: "pandas" },
@@ -112,6 +118,7 @@ export const skillCategories: SkillCategory[] = [
     title: "Ferramentas & deploy",
     items: [
       { name: "Git", slug: "git" },
+      { name: "Vite", slug: "vite" },
       { name: "GitHub", slug: "github" },
       // Sem slug: a Microsoft pediu a remoção do ícone do VS Code do Simple
       // Icons (o mesmo motivo pelo qual o logo do LinkedIn não carrega).
@@ -130,6 +137,8 @@ export const projects: Project[] = [
   {
     title: "OMS - Oficina de Moldes e Segmentos",
     headline: "Controle total da manutenção, do chão de fábrica à gerência.",
+    problem:
+      "Inspeções e reparos da oficina eram registrados em papel, sem histórico centralizado nem rastreabilidade do desgaste de cada peça.",
     description:
       "Plataforma de gestão da manutenção de moldes e segmentos de lingotamento contínuo: painel em tempo real do desgaste de cada peça, sinótico 3D das máquinas, checklists digitais com laudo em PDF, troca guiada por peça reserva, prontuário, auditoria e notificações push. Instala no celular e funciona offline.",
     category: "sistema",
@@ -142,6 +151,8 @@ export const projects: Project[] = [
   {
     title: "Central de Abastecimento",
     headline: "Um painel inteligente em cima das planilhas do SAP.",
+    problem:
+      "O acompanhamento de ordens de manutenção e da cobrança de fornecedores era feito em planilhas exportadas do SAP.",
     description:
       "PWA que acompanha ordens de manutenção a partir das planilhas exportadas do SAP: detecta mudanças a cada importação, aponta o que precisa ser cobrado e organiza o follow-up de fornecedores. Tem dashboard com KPIs e gráficos, assistente de IA que consulta o banco, notificações push e perfis de acesso.",
     category: "sistema",
@@ -153,6 +164,8 @@ export const projects: Project[] = [
   {
     title: "Pass-Line - Inspeção Digital",
     headline: "Fichas de medição em papel viraram um app que funciona offline.",
+    problem:
+      "As fichas de medição das máquinas eram preenchidas em papel, num ambiente onde o sinal de internet nem sempre chega.",
     description:
       "PWA offline-first que digitaliza quatro fichas de inspeção de máquinas de lingotamento contínuo, com alerta visual para medidas fora da tolerância. Salva no aparelho (IndexedDB) com fila de sincronização e gera o PDF oficial no servidor.",
     category: "sistema",
@@ -275,10 +288,12 @@ export const omsShowcase = {
       ],
     },
   ],
+  // Contados no código: routers/*.py do repositório da API (18 módulos,
+  // 52 GET + 68 POST) e README do front (veios C, D, E, F, G, H).
   stats: [
-    { value: 15, suffix: "+", label: "módulos no sistema" },
-    { value: 3, suffix: "", label: "máquinas de lingotamento" },
-    { value: 6, suffix: "", label: "veios monitorados" },
-    { value: 344, suffix: "", label: "ativos rastreados" },
+    { value: 120, suffix: "", label: "endpoints na API (FastAPI)" },
+    { value: 18, suffix: "", label: "módulos de API" },
+    { value: 15, suffix: "+", label: "telas e módulos no app" },
+    { value: 6, suffix: "", label: "veios monitorados em 3 máquinas" },
   ],
 };

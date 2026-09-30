@@ -3,11 +3,12 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
 
+// Cada frase é um projeto real: Pass-Line, Central de Abastecimento e OMS.
 const text =
-  "Não faço só telas bonitas. Construo ferramentas feitas pra usar todo dia: sistemas que funcionam sem internet, painéis que respondem perguntas e sites que trazem clientes de verdade.";
+  "Resolvo problemas reais com código. Transformei fichas de papel em um app que funciona offline, planilhas do SAP em um painel com IA e o controle de uma oficina inteira em um sistema completo.";
 
 // Palavras que ganham o gradiente quando acendem.
-const highlighted = new Set(["ferramentas", "todo", "dia:", "clientes", "verdade."]);
+const highlighted = new Set(["problemas", "reais", "offline,", "IA", "sistema", "completo."]);
 
 function Word({ children, progress, range }: { children: string; progress: MotionValue<number>; range: [number, number] }) {
   // Por função, não keyframes: evita a aceleração nativa (ScrollTimeline)
@@ -37,7 +38,7 @@ export function Manifesto() {
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <p className="mb-8 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.2em] text-muted">
           <span className="h-px w-8 bg-muted" />
-          no que eu acredito
+          o que eu faço
         </p>
         <p
           ref={ref}

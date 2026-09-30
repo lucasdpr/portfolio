@@ -3,11 +3,11 @@
 import { useEffect, useRef, useState, type PointerEvent } from "react";
 import dynamic from "next/dynamic";
 import { AnimatePresence, motion, useInView, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { ArrowDown, ArrowRight, EnvelopeSimple } from "@phosphor-icons/react";
+import { ArrowDown, ArrowRight, DownloadSimple, GithubLogo, LinkedinLogo } from "@phosphor-icons/react";
 import { Magnetic } from "@/components/ui/magnetic-button";
 import { Reveal } from "@/components/ui/reveal";
 import { WordReveal } from "@/components/ui/word-reveal";
-import { profile } from "@/lib/data";
+import { profile, socialLinks } from "@/lib/data";
 import { useIntroDone } from "@/lib/intro";
 
 const HeroScene = dynamic(
@@ -21,7 +21,7 @@ const HeroScene = dynamic(
 );
 
 // O que eu construo — gira embaixo do título.
-const rotatingWords = ["sistemas web", "PWAs offline", "dashboards com IA", "sites que vendem", "APIs REST"];
+const rotatingWords = ["sistemas web", "APIs REST", "PWAs offline", "dashboards com IA", "apps em Next.js"];
 
 function RotatingWord() {
   const [index, setIndex] = useState(0);
@@ -50,6 +50,9 @@ function RotatingWord() {
     </span>
   );
 }
+
+const githubUrl = socialLinks.find((link) => link.slug === "github")?.href;
+const linkedinUrl = socialLinks.find((link) => link.slug === "linkedin")?.href;
 
 export function Hero() {
   const introDone = useIntroDone();
@@ -105,7 +108,7 @@ export function Hero() {
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
                 </span>
-                Disponível para novos projetos
+                Aberto a vagas e projetos
               </div>
             </Reveal>
           )}
@@ -134,6 +137,17 @@ export function Hero() {
             <p className="mt-6 max-w-[52ch] text-base leading-relaxed text-muted sm:text-lg">{profile.tagline}</p>
           </Reveal>
 
+          {/* O que o recrutador procura primeiro: a stack principal */}
+          <Reveal delay={0.7} play={introDone}>
+            <ul aria-label="Stack principal" className="mt-6 flex flex-wrap gap-2">
+              {profile.mainStack.map((tech) => (
+                <li key={tech} className="rounded-full border border-border bg-surface/50 px-3 py-1 font-mono text-xs text-foreground/80 backdrop-blur">
+                  {tech}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+
           <Reveal delay={0.75} play={introDone}>
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <Magnetic>
@@ -148,13 +162,33 @@ export function Hero() {
               </Magnetic>
               <Magnetic>
                 <a
-                  href="#contato"
+                  href={profile.resumeUrl}
+                  download
                   className="flex items-center gap-2 rounded-full border border-border bg-surface/40 px-7 py-4 text-sm font-semibold text-foreground backdrop-blur transition-colors hover:border-accent hover:text-accent active:scale-95"
                 >
-                  <EnvelopeSimple size={16} weight="bold" />
-                  Falar comigo
+                  <DownloadSimple size={16} weight="bold" />
+                  Baixar currículo
                 </a>
               </Magnetic>
+              <div className="flex items-center gap-2">
+                {[
+                  { href: githubUrl, label: "GitHub", icon: <GithubLogo size={19} weight="bold" /> },
+                  { href: linkedinUrl, label: "LinkedIn", icon: <LinkedinLogo size={19} weight="bold" /> },
+                ]
+                  .filter((link) => link.href)
+                  .map((link) => (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={link.label}
+                      className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-surface/40 text-muted backdrop-blur transition-colors hover:border-accent hover:text-accent"
+                    >
+                      {link.icon}
+                    </a>
+                  ))}
+              </div>
             </div>
           </Reveal>
         </motion.div>
