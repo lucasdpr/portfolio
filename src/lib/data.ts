@@ -66,7 +66,7 @@ export const profile = {
   role: "Desenvolvedor Full Stack",
   tagline: "Transformo processos feitos no papel e em planilhas em sistemas web, APIs e apps que funcionam offline, com Python, FastAPI, Next.js e PostgreSQL.",
   bio: [
-    "Trabalho na manutenção de uma siderúrgica e construí sistemas para os problemas da minha própria área: uma API com 120 endpoints, um painel em cima do SAP com assistente de IA e um app de medição que funciona sem internet.",
+    "Construí sistemas completos para a manutenção de uma siderúrgica: uma API com 120 endpoints, um painel em cima do SAP com assistente de IA e um app de medição que funciona sem internet.",
     "Quero fazer isso em tempo integral, num time de desenvolvimento.",
   ],
   education: "Engenharia de Software · 6º período (conclusão em 2027)",
@@ -223,37 +223,31 @@ export const projects: Project[] = [
   },
 ];
 
+// Trajetória como desenvolvedor (datas dos projetos em `projects`).
 export const timeline: TimelineItem[] = [
   {
-    period: "2022 - 2023",
-    title: "Operador de Máquinas Convencionais",
-    place: "Curso profissionalizante - 800 horas",
-    description: "Primeiro contato formal com processos industriais, antes mesmo de pensar em programar.",
-  },
-  {
-    period: "2023 - 2024",
-    title: "Técnico em Mecânica",
-    place: "Curso técnico - 1.200 horas",
+    period: "2025",
+    title: "Primeiros projetos para clientes",
+    place: "Freelancer",
     description:
-      "Aprofundei a base técnica de manutenção industrial que uso até hoje pra entender os problemas que resolvo com código.",
+      "RTS EPI, catálogo digital e meu primeiro projeto vendido, e o site da Oficina do Ar, no ar com domínio próprio.",
   },
   {
-    period: "mar/2024 - dez/2024",
-    title: "Mecânico Júnior",
-    place: "Indústria siderúrgica, Volta Redonda - RJ",
-    description: "Manutenção preventiva e corretiva de máquinas e equipamentos na aciaria e oficina de moldes e segmentos.",
+    period: "2025 - 2026",
+    title: "OMS - gestão da manutenção industrial",
+    place: "Python, FastAPI, PostgreSQL e PWA",
+    description: "API com 120 endpoints, painel em tempo real do desgaste das peças, visualização 3D das máquinas e laudos em PDF.",
   },
   {
-    period: "dez/2024 - Atual",
-    title: "Mecânico de Manutenção",
-    place: "Indústria siderúrgica, Volta Redonda - RJ",
-    description:
-      "Promovido após 9 meses na função anterior. Conhecer o processo por dentro me ensinou a entender o problema antes de escrever a primeira linha de código.",
+    period: "2026",
+    title: "Central de Abastecimento e Pass-Line",
+    place: "Next.js, TypeScript e PostgreSQL",
+    description: "Painel sobre as planilhas do SAP com assistente de IA e app de medição que funciona sem internet.",
   },
   {
     period: "Atual",
     title: "Engenharia de Software",
     place: "Centro Universitário de Barra Mansa (UBM), 6º período",
-    description: "Conclusão prevista para 2027. Estudo à noite o que aplico de dia na oficina, e vice-versa.",
+    description: "Conclusão prevista para 2027.",
   },
 ];
