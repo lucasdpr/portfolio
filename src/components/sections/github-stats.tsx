@@ -39,7 +39,7 @@ export async function GithubStatsSection() {
   return (
     <section className="border-t border-border py-28">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <SectionLabel index="04" text="github" />
+        <SectionLabel index="05" text="github" />
         <Reveal className="max-w-2xl">
           <h2 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">GitHub, ao vivo</h2>
           <p className="mt-4 text-muted">

@@ -53,8 +53,12 @@
   --font-mono: var(--font-mono);
 }
 
-html {
-  scroll-behavior: smooth;
+/* Sem scroll-behavior: smooth aqui — quem suaviza a rolagem é o Lenis
+   (ver components/ui/smooth-scroll.tsx), e os dois juntos brigam. */
+
+/* A intro some de vez quando já foi vista nesta sessão (ver lib/intro.ts). */
+html[data-intro="skip"] .preloader {
+  display: none;
 }
 
 body {
@@ -224,6 +228,22 @@ body {
   .text-gradient,
   .aurora-blob,
   .glow-border::before {
+    animation: none;
+  }
+}
+
+/* Tela do celular rolando sozinha (demo da seção de serviços). O conteúdo
+   é duplicado, então -50% volta exatamente ao começo sem pulo. */
+@keyframes phone-scroll {
+  to {
+    transform: translateY(-50%);
+  }
+}
+.animate-phone-scroll {
+  animation: phone-scroll 9s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-phone-scroll {
     animation: none;
   }
 }

@@ -95,7 +95,7 @@ export function ProjectVisual({ src, title, category, liveUrl, index, sizes }: P
             src={src}
             alt={`Tela do projeto ${title}`}
             fill
-            className="object-cover object-top transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
+            className="object-cover object-left-top transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
             sizes={sizes}
           />
         ) : (

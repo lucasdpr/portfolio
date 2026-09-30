@@ -16,7 +16,7 @@ export function Experience() {
   return (
     <section id="trajetoria" className="border-t border-border bg-surface py-28">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <SectionLabel index="06" text="trajetória" />
+        <SectionLabel index="07" text="trajetória" />
         <WordReveal
           className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
           words={["O", "caminho", "até", { text: "aqui.", className: "text-gradient" }]}

@@ -52,7 +52,7 @@ export function Contact() {
     <section id="contato" className="relative border-t border-border py-28">
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-16 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
         <div>
-          <SectionLabel index="07" text="contato" />
+          <SectionLabel index="08" text="contato" />
           <WordReveal
             className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
             words={["Vamos", { text: "conversar?", className: "text-gradient" }]}

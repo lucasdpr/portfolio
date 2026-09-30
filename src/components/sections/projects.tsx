@@ -1,13 +1,13 @@
 import { SectionLabel } from "@/components/ui/scramble-text";
 import { WordReveal } from "@/components/ui/word-reveal";
 import { Reveal } from "@/components/ui/reveal";
-import { ProjectsGrid } from "@/components/sections/projects-grid";
+import { ProjectsStack } from "@/components/sections/projects-stack";
 import { projects } from "@/lib/data";
 import { resolvePublicImage } from "@/lib/server-image";
 
 export function Projects() {
-  // A checagem de arquivo roda aqui no servidor; a grade (com filtro e
-  // efeitos de mouse) é client component e recebe o caminho já resolvido.
+  // A checagem de arquivo roda aqui no servidor; a pilha de cards (efeitos
+  // de rolagem) é client component e recebe o caminho já resolvido.
   const resolved = projects.map((project) => ({
     ...project,
     imageSrc: resolvePublicImage(project.screenshot, ""),
@@ -31,7 +31,7 @@ export function Projects() {
           </Reveal>
         </div>
 
-        <ProjectsGrid projects={resolved} />
+        <ProjectsStack projects={resolved} />
       </div>
     </section>
   );

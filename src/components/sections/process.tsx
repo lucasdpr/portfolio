@@ -31,7 +31,7 @@ export function Process() {
   return (
     <section className="border-t border-border py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <SectionLabel index="05" text="processo" />
+        <SectionLabel index="06" text="processo" />
         <WordReveal
           className="max-w-2xl text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
           words={["Como", "eu", { text: "trabalho.", className: "text-gradient" }]}

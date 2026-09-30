@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef } from "react";
-import Link from "next/link";
 import { motion, useScroll, useTransform } from "motion/react";
 
 const phrase = ["Vamos construir algo", "✦", "Sistemas", "✦", "Sites", "✦", "PWAs", "✦"];
@@ -19,7 +18,7 @@ export function CtaMarquee() {
 
   return (
     <section ref={ref} aria-label="Chamada para contato" className="overflow-hidden border-t border-border py-20">
-      <Link href="#contato" data-cursor="Contato" className="block space-y-2">
+      <a href="#contato" data-cursor="Contato" className="block space-y-2">
         <motion.p style={{ x: xLeft }} className="flex w-max gap-8 whitespace-nowrap text-6xl font-bold tracking-tight text-foreground sm:text-8xl">
           {line.map((word, index) => (
             <span key={index} className={word === "✦" ? "text-gradient" : ""}>
@@ -32,7 +31,7 @@ export function CtaMarquee() {
             <span key={index}>{word}</span>
           ))}
         </motion.p>
-      </Link>
+      </a>
     </section>
   );
 }

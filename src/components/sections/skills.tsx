@@ -37,7 +37,7 @@ export function Skills() {
     <section id="skills" className="border-t border-border bg-surface py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
-          <SectionLabel index="02" text="stack" />
+          <SectionLabel index="04" text="stack" />
           <WordReveal
             className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
             words={["Minha", "caixa", "de", { text: "ferramentas.", className: "text-gradient" }]}

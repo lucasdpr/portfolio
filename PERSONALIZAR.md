@@ -42,8 +42,8 @@ Para trocar por uma foto real:
 Cada projeto em `data.ts` tem um campo `screenshot` (ex: `/projetos/oms.jpg`).
 Enquanto o arquivo não existir em `public/projetos/`, o card mostra uma arte
 gerada pelo próprio site (um mini-dashboard ou mini-landing). Para usar a
-tela real, é só salvar o print com o mesmo nome — hoje faltam
-`public/projetos/abastecimento.jpg` e `public/projetos/passe-line.jpg`.
+tela real, é só salvar o print com o mesmo nome. Antes de subir print de
+sistema interno, tire nome da empresa e desfoque valores financeiros.
 Proporção ideal: 16:10 (ex: 1600×1000).
 
 ## 4. Currículo em PDF
@@ -71,7 +71,15 @@ route do Next.js — me chama quando quiser fazer essa parte.
 - Fontes: `Outfit` (títulos/texto) e `JetBrains Mono` (detalhes técnicos),
   configuradas em [`src/app/layout.tsx`](src/app/layout.tsx).
 
-## 7. Rodando o projeto
+## 7. Efeitos
+
+- Intro (tela de abertura): aparece uma vez por sessão — `src/components/ui/preloader.tsx`.
+  Para tirar, remova `<Preloader />` de `src/app/layout.tsx`.
+- Rolagem suave: `src/components/ui/smooth-scroll.tsx` (Lenis).
+- Frase do manifesto: `src/components/sections/manifesto.tsx`.
+- Todos os efeitos respeitam "reduzir movimento" do sistema operacional.
+
+## 8. Rodando o projeto
 
 ```bash
 npm run dev
@@ -80,7 +88,7 @@ npm run dev
 Abre em [http://localhost:3000](http://localhost:3000). Depois de editar o
 `data.ts`, é só salvar — a página atualiza sozinha.
 
-## 8. Publicando o site
+## 9. Publicando o site
 
 O jeito mais simples é a [Vercel](https://vercel.com) (mesma empresa do
 Next.js, plano gratuito cobre um portfólio tranquilamente):

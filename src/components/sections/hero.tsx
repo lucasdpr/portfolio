@@ -2,13 +2,13 @@
 
 import { useEffect, useRef, useState, type PointerEvent } from "react";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { ArrowDown, ArrowRight, EnvelopeSimple } from "@phosphor-icons/react";
 import { Magnetic } from "@/components/ui/magnetic-button";
 import { Reveal } from "@/components/ui/reveal";
 import { WordReveal } from "@/components/ui/word-reveal";
 import { profile } from "@/lib/data";
+import { useIntroDone } from "@/lib/intro";
 
 const HeroScene = dynamic(
   () => import("@/components/three/hero-scene").then((mod) => mod.HeroScene),
@@ -21,7 +21,7 @@ const HeroScene = dynamic(
 );
 
 // O que eu construo — gira embaixo do título.
-const rotatingWords = ["sistemas web", "PWAs offline", "dashboards com IA", "sites que vendem", "APIs"];
+const rotatingWords = ["sistemas web", "PWAs offline", "dashboards com IA", "sites que vendem", "APIs REST"];
 
 function RotatingWord() {
   const [index, setIndex] = useState(0);
@@ -52,6 +52,7 @@ function RotatingWord() {
 }
 
 export function Hero() {
+  const introDone = useIntroDone();
   const sectionRef = useRef<HTMLElement>(null);
   const spotRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
@@ -96,7 +97,7 @@ export function Hero() {
       <div className="relative mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-8 px-4 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:px-8">
         <motion.div style={{ y: textY, opacity: textOpacity }}>
           {profile.availableForWork && (
-            <Reveal delay={0}>
+            <Reveal delay={0} play={introDone}>
               <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-3 py-1.5 text-xs text-muted backdrop-blur">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
@@ -107,7 +108,7 @@ export function Hero() {
             </Reveal>
           )}
 
-          <Reveal delay={0.05}>
+          <Reveal delay={0.05} play={introDone}>
             <p className="font-mono text-sm text-muted">
               Olá, eu sou o <span className="text-foreground">{profile.firstName}</span> — {profile.role.toLowerCase()}
             </p>
@@ -115,41 +116,42 @@ export function Hero() {
 
           <WordReveal
             as="h1"
+            play={introDone}
             delay={0.15}
             className="mt-4 text-[2.6rem] font-bold leading-[1.02] tracking-tight text-foreground sm:text-6xl lg:text-7xl xl:text-[5rem]"
             words={["Transformo", "ideias", "em", "produtos", "digitais", { text: "sólidos.", className: "text-gradient" }]}
           />
 
-          <Reveal delay={0.55}>
+          <Reveal delay={0.55} play={introDone}>
             <p className="mt-8 text-xl text-muted sm:text-2xl">
               Eu construo <RotatingWord />
             </p>
           </Reveal>
 
-          <Reveal delay={0.65}>
+          <Reveal delay={0.65} play={introDone}>
             <p className="mt-6 max-w-[52ch] text-base leading-relaxed text-muted sm:text-lg">{profile.tagline}</p>
           </Reveal>
 
-          <Reveal delay={0.75}>
+          <Reveal delay={0.75} play={introDone}>
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <Magnetic>
-                <Link
+                <a
                   href="#projetos"
                   className="group relative flex items-center gap-2 overflow-hidden rounded-full bg-foreground px-7 py-4 text-sm font-semibold text-background transition-transform active:scale-95"
                 >
                   <span className="absolute inset-0 translate-y-full bg-gradient-to-r from-accent to-accent-2 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0" />
                   <span className="relative">Ver projetos</span>
                   <ArrowRight size={16} weight="bold" className="relative transition-transform group-hover:translate-x-1" />
-                </Link>
+                </a>
               </Magnetic>
               <Magnetic>
-                <Link
+                <a
                   href="#contato"
                   className="flex items-center gap-2 rounded-full border border-border bg-surface/40 px-7 py-4 text-sm font-semibold text-foreground backdrop-blur transition-colors hover:border-accent hover:text-accent active:scale-95"
                 >
                   <EnvelopeSimple size={16} weight="bold" />
                   Falar comigo
-                </Link>
+                </a>
               </Magnetic>
             </div>
           </Reveal>
@@ -158,7 +160,7 @@ export function Hero() {
         <motion.div
           style={{ y: sceneY, scale: sceneScale }}
           initial={{ opacity: 0, scale: 0.85 }}
-          animate={{ opacity: 1, scale: 1 }}
+          animate={introDone ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.85 }}
           transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="relative h-[340px] sm:h-[440px] lg:h-[580px]"
         >

@@ -10,6 +10,8 @@ type WordRevealProps = {
   className?: string;
   delay?: number;
   as?: "h1" | "h2";
+  /** Se definido, anima quando virar `true` em vez de ao entrar na tela. */
+  play?: boolean;
 };
 
 /**
@@ -17,7 +19,7 @@ type WordRevealProps = {
  * "máscara" (overflow hidden). Palavras em objeto recebem classe própria
  * (ex: gradiente).
  */
-export function WordReveal({ words, className = "", delay = 0, as = "h2" }: WordRevealProps) {
+export function WordReveal({ words, className = "", delay = 0, as = "h2", play }: WordRevealProps) {
   const reduceMotion = useReducedMotion();
   const Tag = as === "h1" ? motion.h1 : motion.h2;
   const items = words.map((word) => (typeof word === "string" ? { text: word, className: "" } : word));
@@ -27,9 +29,13 @@ export function WordReveal({ words, className = "", delay = 0, as = "h2" }: Word
     <Tag
       aria-label={label}
       initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.4 }}
-      transition={{ staggerChildren: 0.06, delayChildren: delay }}
+      {...(play === undefined
+        ? { whileInView: "visible", viewport: { once: true, amount: 0.4 } }
+        : { animate: play ? "visible" : "hidden" })}
+      variants={{
+        hidden: {},
+        visible: { transition: { staggerChildren: 0.06, delayChildren: delay } },
+      }}
       className={className}
     >
       {items.map((item, index) => (

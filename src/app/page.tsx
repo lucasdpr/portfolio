@@ -1,7 +1,9 @@
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Hero } from "@/components/sections/hero";
+import { Manifesto } from "@/components/sections/manifesto";
 import { About } from "@/components/sections/about";
+import { Services } from "@/components/sections/services";
 import { Skills } from "@/components/sections/skills";
 import { GithubStatsSection } from "@/components/sections/github-stats";
 import { Projects } from "@/components/sections/projects";
@@ -16,9 +18,11 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <Manifesto />
         <About />
-        <Skills />
+        <Services />
         <Projects />
+        <Skills />
         <GithubStatsSection />
         <Process />
         <Experience />
