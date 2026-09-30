@@ -87,6 +87,17 @@ function StackCard({ project, index, total, progress }: CardProps) {
               <p className="mt-4 text-sm leading-relaxed text-muted">{project.description}</p>
             )}
 
+            {project.stats && (
+              <dl className="mt-5 grid grid-cols-3 gap-2">
+                {project.stats.map((stat) => (
+                  <div key={stat.label} className="flex flex-col-reverse rounded-xl border border-border bg-background/60 px-3 py-2">
+                    <dt className="text-[11px] leading-tight text-muted">{stat.label}</dt>
+                    <dd className="text-gradient font-mono text-xl font-bold">{stat.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            )}
+
             <div className="mt-5 flex flex-wrap gap-1.5">
               {project.tags.map((tag) => (
                 <span key={tag} className="rounded-full border border-border bg-background/60 px-3 py-1 font-mono text-[11px] text-muted">

@@ -38,6 +38,8 @@ export type Project = {
   screenshot?: string;
   /** O problema real que o projeto resolveu (aparece antes da solução). */
   problem?: string;
+  /** Números verificáveis do projeto (contados no código), em destaque no card. */
+  stats?: { value: string; label: string }[];
   liveUrl?: string;
   repoUrl?: string;
   /** Card maior no topo da grade. */
@@ -63,8 +65,11 @@ export const profile = {
   firstName: "Lucas",
   role: "Desenvolvedor Full Stack",
   tagline: "Transformo processos feitos no papel e em planilhas em sistemas web, APIs e apps que funcionam offline, com Python, FastAPI, Next.js e PostgreSQL.",
-  bio: "Sou desenvolvedor full stack e estudo Engenharia de Software. Também trabalho na manutenção de uma siderúrgica, e é de lá que vêm meus principais projetos: vi o problema de perto e escrevi o software que resolve. Construí a OMS (API em FastAPI com 120 endpoints, PostgreSQL e PWA), um painel em Next.js que acompanha ordens do SAP com assistente de IA e um app de medição que funciona sem internet. Também desenvolvo sites para clientes.",
-  education: "Engenharia de Software - 6º período",
+  bio: [
+    "Construí sistemas completos para a manutenção de uma siderúrgica: uma API com 120 endpoints, um painel em cima do SAP com assistente de IA e um app de medição que funciona sem internet.",
+    "Disponível para vagas de desenvolvimento full stack.",
+  ],
+  education: "Engenharia de Software · 6º período (conclusão em 2027)",
   location: "Barra Mansa - RJ, Brasil",
   email: "lucasgrafael05@gmail.com",
   whatsapp: "5524999597969",
@@ -144,6 +149,13 @@ export const projects: Project[] = [
     category: "sistema",
     year: "2026",
     tags: ["Python", "FastAPI", "PostgreSQL", "Neon", "Pandas", "JavaScript", "Three.js", "PWA", "Web Push", "Render"],
+    // Contados no repositório da API (routers/*.py: 52 GET + 68 POST) e no
+    // README do front (veios C, D, E, F, G e H).
+    stats: [
+      { value: "120", label: "endpoints na API" },
+      { value: "18", label: "módulos FastAPI" },
+      { value: "6", label: "veios monitorados" },
+    ],
     screenshot: "/projetos/oms.jpg",
     liveUrl: "https://lucasdpr.github.io/oficina-oms/",
     featured: true,
@@ -211,89 +223,31 @@ export const projects: Project[] = [
   },
 ];
 
+// Trajetória como desenvolvedor (datas dos projetos em `projects`).
 export const timeline: TimelineItem[] = [
   {
-    period: "2022 - 2023",
-    title: "Operador de Máquinas Convencionais",
-    place: "Curso profissionalizante - 800 horas",
-    description: "Primeiro contato formal com processos industriais, antes mesmo de pensar em programar.",
-  },
-  {
-    period: "2023 - 2024",
-    title: "Técnico em Mecânica",
-    place: "Curso técnico - 1.200 horas",
+    period: "2025",
+    title: "Primeiros projetos para clientes",
+    place: "Freelancer",
     description:
-      "Aprofundei a base técnica de manutenção industrial que uso até hoje pra entender os problemas que resolvo com código.",
+      "RTS EPI, catálogo digital e meu primeiro projeto vendido, e o site da Oficina do Ar, no ar com domínio próprio.",
   },
   {
-    period: "mar/2024 - dez/2024",
-    title: "Mecânico Júnior",
-    place: "Indústria siderúrgica, Volta Redonda - RJ",
-    description: "Manutenção preventiva e corretiva de máquinas e equipamentos na aciaria e oficina de moldes e segmentos.",
+    period: "2025 - 2026",
+    title: "OMS - gestão da manutenção industrial",
+    place: "Python, FastAPI, PostgreSQL e PWA",
+    description: "API com 120 endpoints, painel em tempo real do desgaste das peças, visualização 3D das máquinas e laudos em PDF.",
   },
   {
-    period: "dez/2024 - Atual",
-    title: "Mecânico de Manutenção",
-    place: "Indústria siderúrgica, Volta Redonda - RJ",
-    description:
-      "Promovido após 9 meses na função anterior. Conhecer o processo por dentro me ensinou a entender o problema antes de escrever a primeira linha de código.",
+    period: "2026",
+    title: "Central de Abastecimento e Pass-Line",
+    place: "Next.js, TypeScript e PostgreSQL",
+    description: "Painel sobre as planilhas do SAP com assistente de IA e app de medição que funciona sem internet.",
   },
   {
     period: "Atual",
     title: "Engenharia de Software",
     place: "Centro Universitário de Barra Mansa (UBM), 6º período",
-    description: "Conclusão prevista para 2027. Estudo à noite o que aplico de dia na oficina, e vice-versa.",
+    description: "Conclusão prevista para 2027.",
   },
 ];
-
-/**
- * Roteiro da vitrine imersiva da OMS (seção "Em destaque"): a tela do
- * sistema cresce até ocupar a tela inteira e passa por estas telas
- * conforme a rolagem. `hotspots` marcam partes reais da interface, em %
- * da imagem (x da esquerda, y do topo). Prints em `public/projetos/`
- * (16:10); tela sem arquivo é pulada.
- */
-export const omsShowcase = {
-  name: "OMS",
-  tagline: "Gestão inteligente da manutenção.",
-  screens: [
-    {
-      image: "/projetos/oms-painel.jpg",
-      title: "Tudo o que importa, numa tela.",
-      text: "Ativos críticos, tonelagem do dia e risco de cada peça, direto do banco de dados.",
-      hotspots: [
-        { x: 14, y: 50, label: "Ativos críticos em tempo real" },
-        { x: 49, y: 24, label: "Instala no celular e funciona offline" },
-        { x: 81, y: 58, label: "Ativos monitorados e sincronizados" },
-      ],
-    },
-    {
-      image: "/projetos/oms-inspecao.jpg",
-      title: "Sabe o que inspecionar primeiro.",
-      text: "Fila de inspeção por desgaste, risco médio por veio e produção lançada por máquina.",
-      hotspots: [
-        { x: 62, y: 17, label: "Fila priorizada por desgaste" },
-        { x: 22, y: 56, label: "Risco médio por veio" },
-        { x: 83, y: 56, label: "Produção por máquina" },
-      ],
-    },
-    {
-      image: "/projetos/oms-veios.jpg",
-      title: "Cada peça, em cada posição.",
-      text: "Onde cada molde e segmento está instalado, quanto já rodou e quanto falta pro limite.",
-      hotspots: [
-        { x: 50, y: 14, label: "Todos os veios, um clique" },
-        { x: 29, y: 46, label: "Desgaste acumulado da peça" },
-        { x: 50, y: 55, label: "Troca pela reserva em uma ação" },
-      ],
-    },
-  ],
-  // Contados no código: routers/*.py do repositório da API (18 módulos,
-  // 52 GET + 68 POST) e README do front (veios C, D, E, F, G, H).
-  stats: [
-    { value: 120, suffix: "", label: "endpoints na API (FastAPI)" },
-    { value: 18, suffix: "", label: "módulos de API" },
-    { value: 15, suffix: "+", label: "telas e módulos no app" },
-    { value: 6, suffix: "", label: "veios monitorados em 3 máquinas" },
-  ],
-};

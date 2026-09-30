@@ -18,7 +18,7 @@ export function Projects() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <SectionLabel index="03" text="projetos" />
+            <SectionLabel index="01" text="projetos" />
             <WordReveal
               className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl"
               words={["Coisas", "que", "eu", { text: "construí.", className: "text-gradient" }]}

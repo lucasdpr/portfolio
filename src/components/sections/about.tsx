@@ -1,73 +1,84 @@
-import { DownloadSimple } from "@phosphor-icons/react/dist/ssr";
+import { ArrowRight, DownloadSimple, LinkedinLogo } from "@phosphor-icons/react/dist/ssr";
 import { Reveal } from "@/components/ui/reveal";
 import { ProfilePhoto } from "@/components/ui/profile-photo";
 import { SectionLabel } from "@/components/ui/scramble-text";
 import { WordReveal } from "@/components/ui/word-reveal";
-import { Counter } from "@/components/ui/counter";
-import { profile, projects, skillCategories } from "@/lib/data";
+import { profile, projects, socialLinks } from "@/lib/data";
 
+/** Sobre curto: quem é, o que já fez (em fatos) e o que quer. Sem adjetivos. */
 export function About() {
-  const stats = [
-    { value: projects.filter((project) => project.category === "sistema").length, suffix: "", label: "sistemas completos" },
-    { value: projects.filter((project) => project.liveUrl).length, suffix: "", label: "projetos publicados" },
-    // Contado no código da API da OMS (routers/*.py: 52 GET + 68 POST).
-    { value: 120, suffix: "", label: "endpoints na API da OMS" },
-    { value: skillCategories.flatMap((category) => category.items).length, suffix: "", label: "tecnologias que uso" },
-  ];
-
+  const systems = projects.filter((project) => project.category === "sistema").length;
+  const sites = projects.filter((project) => project.category === "site").length;
   const facts = [
-    { label: "Formação", value: profile.education },
-    { label: "Baseado em", value: profile.location },
+    // Contado no código da API da OMS (routers/*.py: 52 GET + 68 POST).
+    { value: "120", label: "endpoints na API da OMS" },
+    { value: String(projects.length), label: `projetos: ${systems} sistemas e ${sites} sites` },
+    { value: String(projects.filter((project) => project.liveUrl).length), label: "projetos no ar" },
+    { value: "2027", label: "formatura em Eng. de Software" },
   ];
+  const linkedin = socialLinks.find((link) => link.slug === "linkedin")?.href;
 
   return (
     <section id="sobre" className="relative overflow-hidden border-t border-border py-28">
-      <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
+      <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 px-4 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:px-8">
         <Reveal>
           <ProfilePhoto />
         </Reveal>
 
         <div>
-          <SectionLabel index="01" text="sobre mim" />
+          <SectionLabel index="03" text="sobre mim" />
           <WordReveal
-            className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
-            words={["Do", "banco", "de", "dados", "à", { text: "interface.", className: "text-gradient" }]}
+            className="text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl"
+            words={["Desenvolvedor", { text: "full", className: "text-gradient" }, { text: "stack.", className: "text-gradient" }]}
           />
+
           <Reveal delay={0.1}>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">{profile.bio}</p>
+            <div className="mt-8 max-w-xl space-y-4 text-lg leading-relaxed text-muted">
+              {profile.bio.map((paragraph, index) => (
+                <p key={index} className={index === profile.bio.length - 1 ? "font-medium text-foreground" : ""}>
+                  {paragraph}
+                </p>
+              ))}
+            </div>
           </Reveal>
 
           <Reveal delay={0.15}>
-            <dl className="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-4">
-              {stats.map((stat) => (
-                <div key={stat.label} className="flex flex-col-reverse">
-                  <dt className="mt-1 text-xs text-muted">{stat.label}</dt>
-                  <dd className="text-gradient text-4xl font-bold tabular-nums sm:text-5xl">
-                    <Counter value={stat.value} suffix={stat.suffix} />
-                  </dd>
+            <dl className="mt-12 grid grid-cols-2 gap-x-8 gap-y-8 sm:grid-cols-4">
+              {facts.map((fact) => (
+                <div key={fact.label} className="flex flex-col border-t border-border pt-4">
+                  <dt className="mt-1 text-xs leading-snug text-muted">{fact.label}</dt>
+                  <dd className="order-first font-mono text-3xl font-bold tracking-tight text-foreground">{fact.value}</dd>
                 </div>
               ))}
             </dl>
           </Reveal>
 
           <Reveal delay={0.2}>
-            <dl className="mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2">
-              {facts.map((fact) => (
-                <div key={fact.label} className="bg-background px-5 py-4">
-                  <dt className="text-xs text-muted">{fact.label}</dt>
-                  <dd className="mt-1 text-sm font-medium text-foreground">{fact.value}</dd>
-                </div>
-              ))}
-            </dl>
-
-            <a
-              href={profile.resumeUrl}
-              download
-              className="group mt-8 inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-semibold text-foreground transition-colors hover:border-accent hover:text-accent"
-            >
-              <DownloadSimple size={16} weight="bold" className="transition-transform group-hover:translate-y-0.5" />
-              Baixar currículo
-            </a>
+            <div className="mt-12 flex flex-wrap items-center gap-3">
+              <a
+                href={profile.resumeUrl}
+                download
+                className="group inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background transition-transform active:scale-95"
+              >
+                <DownloadSimple size={16} weight="bold" className="transition-transform group-hover:translate-y-0.5" />
+                Baixar currículo
+              </a>
+              {linkedin && (
+                <a
+                  href={linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:border-accent hover:text-accent"
+                >
+                  <LinkedinLogo size={16} weight="bold" />
+                  LinkedIn
+                </a>
+              )}
+              <a href="#contato" className="group inline-flex items-center gap-1.5 px-3 py-3 text-sm font-semibold text-muted transition-colors hover:text-accent">
+                Falar comigo
+                <ArrowRight size={15} weight="bold" className="transition-transform group-hover:translate-x-1" />
+              </a>
+            </div>
           </Reveal>
         </div>
       </div>

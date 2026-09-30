@@ -23,7 +23,7 @@ export function Experience() {
         />
         <Reveal delay={0.1}>
           <p className="mt-4 max-w-xl text-muted">
-            Uma base técnica na indústria e a engenharia de software em paralelo: aprendi a entender o problema antes de propor a solução.
+            Os marcos da minha trajetória como desenvolvedor.
           </p>
         </Reveal>
 
