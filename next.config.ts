@@ -15,9 +15,6 @@ const nextConfig: NextConfig = {
     // servidor). Sem isso, todo <Image> de fora do domínio quebraria.
     unoptimized: true,
     remotePatterns: [
-      // Placeholder project screenshots (see src/lib/data.ts) — safe to
-      // remove once every project has a real image.
-      { protocol: "https", hostname: "picsum.photos" },
       // Avatar real do GitHub (seção "GitHub, ao vivo").
       { protocol: "https", hostname: "avatars.githubusercontent.com" },
     ],

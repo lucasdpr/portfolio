@@ -16,6 +16,8 @@
   --accent: #0891b2;
   --accent-foreground: #ffffff;
   --glow: rgba(8, 145, 178, 0.28);
+  --accent-2: #7c3aed;
+  --accent-3: #db2777;
   --danger: #b91c1c;
 }
 
@@ -30,6 +32,8 @@
   --accent: #22d3ee;
   --accent-foreground: #09090b;
   --glow: rgba(34, 211, 238, 0.35);
+  --accent-2: #a78bfa;
+  --accent-3: #f472b6;
   --danger: #f87171;
 }
 
@@ -42,13 +46,19 @@
   --color-border: var(--border);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-accent-2: var(--accent-2);
+  --color-accent-3: var(--accent-3);
   --color-danger: var(--danger);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
 }
 
-html {
-  scroll-behavior: smooth;
+/* Sem scroll-behavior: smooth aqui — quem suaviza a rolagem é o Lenis
+   (ver components/ui/smooth-scroll.tsx), e os dois juntos brigam. */
+
+/* A intro some de vez quando já foi vista nesta sessão (ver lib/intro.ts). */
+html[data-intro="skip"] .preloader {
+  display: none;
 }
 
 body {
@@ -119,8 +129,121 @@ body {
 .animate-marquee {
   animation: marquee-scroll 32s linear infinite;
 }
+.animate-marquee-reverse {
+  animation: marquee-scroll 38s linear infinite reverse;
+}
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee {
+  .animate-marquee,
+  .animate-marquee-reverse {
+    animation: none;
+  }
+}
+
+/* ---- Efeitos -------------------------------------------------------- */
+
+/* Texto com gradiente animado (usado nas palavras em destaque). */
+.text-gradient {
+  background: linear-gradient(100deg, var(--accent), var(--accent-2), var(--accent-3), var(--accent));
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-pan 8s linear infinite;
+}
+@keyframes gradient-pan {
+  to {
+    background-position: 300% 0;
+  }
+}
+
+/* Blobs de luz desfocados que flutuam atrás do Hero. */
+.aurora-blob {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(90px);
+  opacity: 0.45;
+  will-change: transform;
+  animation: aurora-float 18s ease-in-out infinite alternate;
+}
+:root:not(.dark) .aurora-blob {
+  opacity: 0.25;
+}
+@keyframes aurora-float {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(8%, -6%, 0) scale(1.15);
+  }
+  100% {
+    transform: translate3d(-6%, 8%, 0) scale(0.95);
+  }
+}
+
+/* Borda com brilho girando (conic-gradient) — cards em destaque. */
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+.glow-border {
+  position: relative;
+  isolation: isolate;
+}
+.glow-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--border-angle),
+    transparent 0deg,
+    var(--accent) 60deg,
+    var(--accent-2) 120deg,
+    transparent 180deg,
+    transparent 360deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: border-spin 6s linear infinite;
+}
+@keyframes border-spin {
+  to {
+    --border-angle: 360deg;
+  }
+}
+
+/* Letreiro gigante com contorno (faixa de CTA antes do contato). */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-gradient,
+  .aurora-blob,
+  .glow-border::before {
+    animation: none;
+  }
+}
+
+/* Tela do celular rolando sozinha (demo da seção de serviços). O conteúdo
+   é duplicado, então -50% volta exatamente ao começo sem pulo. */
+@keyframes phone-scroll {
+  to {
+    transform: translateY(-50%);
+  }
+}
+.animate-phone-scroll {
+  animation: phone-scroll 9s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-phone-scroll {
     animation: none;
   }
 }

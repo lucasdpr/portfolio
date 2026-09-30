@@ -22,18 +22,24 @@ export type SkillCategory = {
   items: SkillItem[];
 };
 
+export type ProjectCategory = "sistema" | "site";
+
 export type Project = {
   title: string;
+  /** Frase curta que aparece em destaque no card. */
+  headline: string;
   description: string;
+  category: ProjectCategory;
+  year: string;
   tags: string[];
-  /** Imagem de placeholder (Picsum) — usada até a screenshot real existir. */
-  image: string;
   /** Caminho local (ex: "/projetos/oms.jpg") da screenshot de verdade.
-   * Opcional: enquanto o arquivo não existir em `public/projetos/`, o site
-   * cai automaticamente para `image` sem quebrar. */
+   * Opcional: enquanto o arquivo não existir em `public/projetos/`, o card
+   * mostra uma arte gerada no próprio site em vez de uma foto aleatória. */
   screenshot?: string;
   liveUrl?: string;
   repoUrl?: string;
+  /** Card maior no topo da grade. */
+  featured?: boolean;
 };
 
 export type TimelineItem = {
@@ -54,8 +60,8 @@ export const profile = {
   fullName: "Lucas Gabriel de Paula Rafael",
   firstName: "Lucas",
   role: "Desenvolvedor Full Stack",
-  tagline: "Desenvolvo sistemas web e sites sob medida, de aplicações industriais a produtos digitais para negócios.",
-  bio: "Desenvolvo sistemas web de ponta a ponta, do banco de dados à interface. Tenho experiência em criar soluções reais para problemas concretos — desde sistemas de gestão industrial até catálogos digitais e landing pages. Estudo Engenharia de Software e aplico na prática o que aprendo em sala, construindo projetos que clientes usam de verdade. Meu foco é entregar código limpo, performático e que resolve o problema do usuário antes de tudo.",
+  tagline: "Crio sistemas web, PWAs e sites sob medida: de painéis com IA e apps que funcionam offline a sites que trazem clientes para negócios locais.",
+  bio: "Desenvolvo sistemas web de ponta a ponta, do banco de dados à interface. Já entreguei desde painéis de dados com assistente de IA e aplicativos que funcionam offline até catálogos digitais e sites institucionais para clientes reais. Estudo Engenharia de Software e aplico na prática o que aprendo em sala, construindo projetos que clientes usam de verdade. Meu foco é entregar código limpo, performático e que resolve o problema do usuário antes de tudo.",
   education: "Engenharia de Software - 6º período",
   location: "Barra Mansa - RJ, Brasil",
   email: "lucasgrafael05@gmail.com",
@@ -84,6 +90,7 @@ export const skillCategories: SkillCategory[] = [
       { name: "TypeScript", slug: "typescript" },
       { name: "Tailwind CSS", slug: "tailwindcss" },
       { name: "Three.js", slug: "threedotjs" },
+      { name: "Zod", slug: "zod" },
       { name: "PWA" },
       { name: "Design Responsivo" },
     ],
@@ -96,6 +103,7 @@ export const skillCategories: SkillCategory[] = [
       { name: "Node.js", slug: "nodedotjs" },
       { name: "PostgreSQL", slug: "postgresql" },
       { name: "Neon", slug: "neon" },
+      { name: "Supabase", slug: "supabase" },
       { name: "MySQL", slug: "mysql" },
     ],
   },
@@ -113,26 +121,52 @@ export const skillCategories: SkillCategory[] = [
   },
 ];
 
-// O primeiro item vira o "projeto em destaque"; os demais entram na grade
-// abaixo. `liveUrl`/`repoUrl` ficam de fora quando ainda não há um link
-// público — é melhor não mostrar um botão do que mostrar um que não leva a
-// lugar nenhum.
+// `liveUrl`/`repoUrl` ficam de fora quando ainda não há um link público —
+// é melhor não mostrar um botão do que mostrar um que não leva a lugar
+// nenhum. Os sistemas internos (Abastecimento e Pass-Line) não têm link de
+// propósito: exigem login e usam dados da empresa.
 export const projects: Project[] = [
   {
     title: "OMS - Oficina de Moldes e Segmentos",
+    headline: "Gestão de manutenção industrial, do chão de fábrica à gerência.",
     description:
-      "Sistema de gestão de manutenção industrial para uma grande siderúrgica, com API em Python/FastAPI e front-end em PWA para uso em campo. Case completo mais abaixo.",
+      "Sistema de gestão de manutenção com API em Python/FastAPI, PostgreSQL e front-end PWA para registrar inspeções e reparos direto no celular, com histórico completo e rastreabilidade de cada equipamento.",
+    category: "sistema",
+    year: "2026",
     tags: ["Python", "FastAPI", "PostgreSQL", "JavaScript", "PWA", "Render"],
-    image: "https://picsum.photos/seed/oms-oficina-moldes/1400/1000",
     screenshot: "/projetos/oms.jpg",
     liveUrl: "https://lucasdpr.github.io/oficina-oms/",
+    featured: true,
+  },
+  {
+    title: "Central de Abastecimento",
+    headline: "Um painel inteligente em cima das planilhas do SAP.",
+    description:
+      "PWA que acompanha ordens de manutenção a partir das planilhas exportadas do SAP: detecta mudanças a cada importação, aponta o que precisa ser cobrado e organiza o follow-up de fornecedores. Tem dashboard com KPIs e gráficos, assistente de IA que consulta o banco, notificações push e perfis de acesso.",
+    category: "sistema",
+    year: "2026",
+    tags: ["Next.js", "TypeScript", "PostgreSQL", "Recharts", "IA", "Web Push"],
+    screenshot: "/projetos/abastecimento.jpg",
+    featured: true,
+  },
+  {
+    title: "Pass-Line - Inspeção Digital",
+    headline: "Fichas de medição em papel viraram um app que funciona offline.",
+    description:
+      "PWA offline-first que digitaliza quatro fichas de inspeção de máquinas de lingotamento contínuo, com alerta visual para medidas fora da tolerância. Salva no aparelho (IndexedDB) com fila de sincronização e gera o PDF oficial no servidor.",
+    category: "sistema",
+    year: "2026",
+    tags: ["Next.js", "TypeScript", "Supabase", "IndexedDB", "PWA", "pdf-lib"],
+    screenshot: "/projetos/passe-line.jpg",
   },
   {
     title: "RTS EPI - Catálogo de Produtos",
+    headline: "Meu primeiro projeto vendido como freelancer.",
     description:
-      "Site e catálogo digital para um fornecedor de equipamentos de proteção individual. Meu primeiro projeto vendido como freelancer, no ar e em uso real pelo cliente, otimizado para navegação no celular e contato rápido via WhatsApp.",
-    tags: ["HTML5", "CSS3", "JavaScript", "GitHub Pages"],
-    image: "https://picsum.photos/seed/rts-epi-catalogo/900/700",
+      "Site e catálogo digital para um fornecedor de equipamentos de proteção individual, no ar e em uso real pelo cliente, otimizado para o celular e para contato rápido via WhatsApp.",
+    category: "site",
+    year: "2025",
+    tags: ["HTML5", "CSS3", "JavaScript", "Vercel"],
     screenshot: "/projetos/rts-epi.jpg",
     liveUrl: "https://rts-epi-frontend.vercel.app/",
     // Repositório encontrado automaticamente a partir da pasta local do
@@ -140,22 +174,26 @@ export const projects: Project[] = [
     repoUrl: "https://github.com/bloominglies/rts-epi-frontend",
   },
   {
-    title: "Brasa da Vila - Site & Cardápio Digital",
+    title: "Oficina do Ar",
+    headline: "Site institucional em produção, com domínio próprio.",
     description:
-      "Plataforma web para restaurante com cardápio interativo, com foco em carregamento rápido e boa experiência para o cliente.",
+      "Site para uma oficina especializada em ar-condicionado automotivo em Volta Redonda (RJ), apresentando os serviços e facilitando o contato de novos clientes.",
+    category: "site",
+    year: "2025",
     tags: ["HTML5", "CSS3", "JavaScript"],
-    image: "https://picsum.photos/seed/brasa-da-vila/900/700",
-    screenshot: "/projetos/brasa-da-vila.jpg",
-    liveUrl: "https://lucasdpr.github.io/Catalogo-de-Apresentacao/",
-  },
-  {
-    title: "Oficina do Ar - Ar-condicionado Automotivo",
-    description:
-      "Site institucional para uma oficina especializada em ar-condicionado automotivo em Volta Redonda (RJ). Projeto real, no ar em produção com domínio próprio, apresentando os serviços da empresa e facilitando o contato de clientes.",
-    tags: ["HTML5", "CSS3", "JavaScript"],
-    image: "https://picsum.photos/seed/oficina-do-ar/900/700",
     screenshot: "/projetos/oficina-do-ar.jpg",
     liveUrl: "https://oficinadoar.xyz",
+  },
+  {
+    title: "Brasa da Vila",
+    headline: "Cardápio digital rápido para restaurante.",
+    description:
+      "Plataforma web para restaurante com cardápio interativo, com foco em carregamento rápido e boa experiência para o cliente no celular.",
+    category: "site",
+    year: "2025",
+    tags: ["HTML5", "CSS3", "JavaScript"],
+    screenshot: "/projetos/brasa-da-vila.jpg",
+    liveUrl: "https://lucasdpr.github.io/Catalogo-de-Apresentacao/",
   },
 ];
 
@@ -184,7 +222,7 @@ export const timeline: TimelineItem[] = [
     title: "Mecânico de Manutenção",
     place: "Indústria siderúrgica, Volta Redonda - RJ",
     description:
-      "Promovido após 9 meses na função anterior. Foi vendo de perto os checklists em papel que nasceu a ideia do sistema OMS.",
+      "Promovido após 9 meses na função anterior. Conhecer o processo por dentro me ensinou a entender o problema antes de escrever a primeira linha de código.",
   },
   {
     period: "Atual",

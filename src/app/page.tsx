@@ -1,13 +1,15 @@
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Hero } from "@/components/sections/hero";
+import { Manifesto } from "@/components/sections/manifesto";
 import { About } from "@/components/sections/about";
+import { Services } from "@/components/sections/services";
 import { Skills } from "@/components/sections/skills";
 import { GithubStatsSection } from "@/components/sections/github-stats";
-import { OmsCase } from "@/components/sections/oms-case";
 import { Projects } from "@/components/sections/projects";
 import { Process } from "@/components/sections/process";
 import { Experience } from "@/components/sections/experience";
+import { CtaMarquee } from "@/components/sections/cta-marquee";
 import { Contact } from "@/components/sections/contact";
 
 export default function Home() {
@@ -16,13 +18,15 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <Manifesto />
         <About />
+        <Services />
+        <Projects />
         <Skills />
         <GithubStatsSection />
-        <OmsCase />
-        <Projects />
         <Process />
         <Experience />
+        <CtaMarquee />
         <Contact />
       </main>
       <Footer />
