@@ -4,6 +4,8 @@ import { useState, type FormEvent } from "react";
 import { PaperPlaneTilt, LinkedinLogo, WhatsappLogo } from "@phosphor-icons/react";
 import { Reveal } from "@/components/ui/reveal";
 import { TechIcon } from "@/components/ui/tech-icon";
+import { SectionLabel } from "@/components/ui/scramble-text";
+import { WordReveal } from "@/components/ui/word-reveal";
 import { profile, socialLinks } from "@/lib/data";
 import { gmailComposeUrl } from "@/lib/contact-links";
 
@@ -47,10 +49,15 @@ export function Contact() {
   }
 
   return (
-    <section id="contato" className="border-t border-border py-24">
+    <section id="contato" className="relative border-t border-border py-28">
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-16 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
-        <Reveal>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Vamos conversar</h2>
+        <div>
+          <SectionLabel index="07" text="contato" />
+          <WordReveal
+            className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
+            words={["Vamos", { text: "conversar?", className: "text-gradient" }]}
+          />
+          <Reveal delay={0.1}>
           <p className="mt-4 max-w-md leading-relaxed text-muted">
             Tem um projeto em mente, uma vaga ou só quer trocar uma ideia sobre tecnologia? Me manda uma mensagem.
           </p>
@@ -113,10 +120,11 @@ export function Contact() {
               );
             })}
           </div>
-        </Reveal>
+          </Reveal>
+        </div>
 
         <Reveal delay={0.1}>
-          <form onSubmit={handleSubmit} noValidate className="space-y-5">
+          <form onSubmit={handleSubmit} noValidate className="glow-border space-y-5 rounded-3xl bg-surface/80 p-6 backdrop-blur sm:p-8">
             <div className="flex flex-col gap-2">
               <label htmlFor="name" className="text-sm font-medium text-foreground">
                 Nome
@@ -125,7 +133,7 @@ export function Contact() {
                 id="name"
                 value={form.name}
                 onChange={(event) => updateField("name", event.target.value)}
-                className="rounded-xl border border-border bg-surface px-4 py-3 text-foreground placeholder:text-muted/60 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
+                className="rounded-xl border border-border bg-background px-4 py-3 text-foreground placeholder:text-muted/60 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
                 placeholder="Como posso te chamar?"
               />
               {errors.name && <p className="text-sm text-danger">{errors.name}</p>}
@@ -140,7 +148,7 @@ export function Contact() {
                 type="email"
                 value={form.email}
                 onChange={(event) => updateField("email", event.target.value)}
-                className="rounded-xl border border-border bg-surface px-4 py-3 text-foreground placeholder:text-muted/60 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
+                className="rounded-xl border border-border bg-background px-4 py-3 text-foreground placeholder:text-muted/60 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
                 placeholder="voce@email.com"
               />
               {errors.email && <p className="text-sm text-danger">{errors.email}</p>}
@@ -155,7 +163,7 @@ export function Contact() {
                 rows={4}
                 value={form.message}
                 onChange={(event) => updateField("message", event.target.value)}
-                className="resize-none rounded-xl border border-border bg-surface px-4 py-3 text-foreground placeholder:text-muted/60 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
+                className="resize-none rounded-xl border border-border bg-background px-4 py-3 text-foreground placeholder:text-muted/60 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
                 placeholder="Me conta um pouco sobre o projeto ou a ideia."
               />
               {errors.message && <p className="text-sm text-danger">{errors.message}</p>}

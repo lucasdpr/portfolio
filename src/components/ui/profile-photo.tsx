@@ -13,7 +13,9 @@ export function ProfilePhoto() {
   const hasPhoto = photoSrc !== "";
 
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-[2rem] border border-border bg-surface-elevated">
+    <div className="glow-border relative mx-auto aspect-[4/5] w-full max-w-sm rounded-[2rem]">
+    <div aria-hidden="true" className="absolute -inset-6 -z-10 rounded-[3rem] bg-gradient-to-br from-accent/30 via-accent-2/20 to-transparent blur-3xl" />
+    <div className="relative h-full w-full overflow-hidden rounded-[2rem] bg-surface-elevated">
       {hasPhoto ? (
         <Image
           src={photoSrc}
@@ -44,6 +46,7 @@ export function ProfilePhoto() {
           <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent" />
         </span>
       </div>
+    </div>
     </div>
   );
 }

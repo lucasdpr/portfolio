@@ -39,10 +39,12 @@ Para trocar por uma foto real:
 
 ## 3. Screenshots dos projetos
 
-As imagens dos projetos hoje vêm do [Picsum](https://picsum.photos) (fotos
-aleatórias, só para preencher o layout). Troque o campo `image` de cada
-projeto em `data.ts` por uma screenshot real (pode ser um arquivo em
-`public/projetos/nome.png`, referenciado como `/projetos/nome.png`).
+Cada projeto em `data.ts` tem um campo `screenshot` (ex: `/projetos/oms.jpg`).
+Enquanto o arquivo não existir em `public/projetos/`, o card mostra uma arte
+gerada pelo próprio site (um mini-dashboard ou mini-landing). Para usar a
+tela real, é só salvar o print com o mesmo nome — hoje faltam
+`public/projetos/abastecimento.jpg` e `public/projetos/passe-line.jpg`.
+Proporção ideal: 16:10 (ex: 1600×1000).
 
 ## 4. Currículo em PDF
 

@@ -1,6 +1,8 @@
 import { Reveal } from "@/components/ui/reveal";
 import { TechIcon } from "@/components/ui/tech-icon";
 import { SpotlightCard } from "@/components/ui/spotlight-card";
+import { SectionLabel } from "@/components/ui/scramble-text";
+import { WordReveal } from "@/components/ui/word-reveal";
 import { skillCategories, type SkillItem } from "@/lib/data";
 
 // A marquee só faz sentido pra itens com logo de marca (algumas práticas,
@@ -17,7 +19,7 @@ function CategoryCard({ title, items, className = "" }: { title: string; items: 
         {items.map((item) => (
           <span
             key={item.name}
-            className="group flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-sm text-foreground"
+            className="group flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-sm text-foreground transition-all duration-300 hover:-translate-y-1 hover:border-accent/60 hover:shadow-lg hover:shadow-accent/10"
           >
             {item.slug && <TechIcon slug={item.slug} label={item.name} size={18} />}
             {item.name}
@@ -32,16 +34,20 @@ export function Skills() {
   const [frontend, ...rest] = skillCategories;
 
   return (
-    <section id="skills" className="border-t border-border bg-surface py-24">
+    <section id="skills" className="border-t border-border bg-surface py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <Reveal className="mx-auto max-w-xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Tecnologias que eu uso
-          </h2>
-          <p className="mt-4 text-muted">
-            Um retrato honesto da minha caixa de ferramentas hoje, não uma lista de tudo que já toquei uma vez.
-          </p>
-        </Reveal>
+        <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
+          <SectionLabel index="02" text="stack" />
+          <WordReveal
+            className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
+            words={["Minha", "caixa", "de", { text: "ferramentas.", className: "text-gradient" }]}
+          />
+          <Reveal delay={0.1}>
+            <p className="mt-4 text-muted">
+              Um retrato honesto do que uso hoje, não uma lista de tudo que já toquei uma vez.
+            </p>
+          </Reveal>
+        </div>
 
         <div className="mt-14 grid grid-cols-1 gap-4 lg:grid-cols-[1.3fr_1fr]">
           <Reveal>
@@ -63,21 +69,25 @@ export function Skills() {
       </div>
 
       <div
-        className="mt-16 overflow-hidden border-y border-border py-8"
+        className="mt-16 space-y-6 overflow-hidden border-y border-border py-8"
         style={{
           maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
           WebkitMaskImage:
             "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
         }}
       >
-        <div className="flex w-max animate-marquee gap-16">
-          {[...allSkills, ...allSkills].map((item, index) => (
-            <span key={`${item.name}-${index}`} className="group flex items-center gap-3 text-muted">
-              <TechIcon slug={item.slug} label={item.name} size={26} />
-              <span className="font-mono text-sm whitespace-nowrap">{item.name}</span>
-            </span>
-          ))}
-        </div>
+        {[false, true].map((reverse) => (
+          <div key={String(reverse)} className={`flex w-max gap-16 ${reverse ? "animate-marquee-reverse" : "animate-marquee"}`}>
+            {(reverse ? [...allSkills].reverse() : allSkills)
+              .concat(reverse ? [...allSkills].reverse() : allSkills)
+              .map((item, index) => (
+                <span key={`${item.name}-${index}`} className="group flex items-center gap-3 text-muted">
+                  <TechIcon slug={item.slug} label={item.name} size={26} />
+                  <span className="font-mono text-sm whitespace-nowrap">{item.name}</span>
+                </span>
+              ))}
+          </div>
+        ))}
       </div>
     </section>
   );

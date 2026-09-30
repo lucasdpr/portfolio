@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { Reveal } from "@/components/ui/reveal";
+import { SectionLabel } from "@/components/ui/scramble-text";
+import { Counter } from "@/components/ui/counter";
 import { getGithubStats } from "@/lib/github";
 import { socialLinks } from "@/lib/data";
 
@@ -14,7 +16,9 @@ function extractGithubUsername(): string | null {
 function StatBlock({ value, label }: { value: number; label: string }) {
   return (
     <div>
-      <p className="font-mono text-2xl font-bold text-foreground">{value}</p>
+      <p className="font-mono text-2xl font-bold text-foreground">
+        <Counter value={value} />
+      </p>
       <p className="text-xs text-muted">{label}</p>
     </div>
   );
@@ -33,16 +37,17 @@ export async function GithubStatsSection() {
   if (!stats) return null;
 
   return (
-    <section className="border-t border-border py-24">
+    <section className="border-t border-border py-28">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <SectionLabel index="04" text="github" />
         <Reveal className="max-w-2xl">
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">GitHub, ao vivo</h2>
+          <h2 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">GitHub, ao vivo</h2>
           <p className="mt-4 text-muted">
             Sem print de tela: estes números vêm direto da API do GitHub toda vez que a página é publicada.
           </p>
         </Reveal>
 
-        <Reveal delay={0.1} className="mt-10 rounded-3xl border border-border bg-surface p-8 sm:p-10">
+        <Reveal delay={0.1} className="glow-border mt-10 rounded-3xl bg-surface p-8 sm:p-10">
           <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center gap-4">
               <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full border border-border">

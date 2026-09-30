@@ -1,12 +1,14 @@
 import { MagnifyingGlass, Notebook, Code, RocketLaunch } from "@phosphor-icons/react/dist/ssr";
 import { Reveal } from "@/components/ui/reveal";
 import { SpotlightCard } from "@/components/ui/spotlight-card";
+import { SectionLabel } from "@/components/ui/scramble-text";
+import { WordReveal } from "@/components/ui/word-reveal";
 
 const steps = [
   {
     icon: MagnifyingGlass,
     title: "Entender",
-    description: "Antes de programar, entendo o processo de verdade, do jeito que aprendi a fazer antes de mexer numa máquina.",
+    description: "Converso com quem vai usar e entendo o processo de verdade antes de escrever a primeira linha.",
   },
   {
     icon: Notebook,
@@ -16,34 +18,42 @@ const steps = [
   {
     icon: Code,
     title: "Construir",
-    description: "Programo com atenção a detalhe e testo cada parte, a mesma disciplina que uma parada de máquina exige.",
+    description: "Entregas curtas e testadas, com você vendo o progresso de perto em vez de esperar meses por uma surpresa.",
   },
   {
     icon: RocketLaunch,
     title: "Entregar",
-    description: "Documento o que foi feito e acompanho o resultado na prática, não só até o deploy.",
+    description: "Publico, documento e acompanho o uso real. O projeto não termina no deploy.",
   },
 ];
 
 export function Process() {
   return (
-    <section className="border-t border-border py-24">
+    <section className="border-t border-border py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <Reveal className="max-w-2xl">
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Como eu trabalho</h2>
-          <p className="mt-4 text-muted">
-            O mesmo processo que aprendi na manutenção industrial, aplicado a cada projeto que construo.
-          </p>
-        </Reveal>
+        <SectionLabel index="05" text="processo" />
+        <WordReveal
+          className="max-w-2xl text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
+          words={["Como", "eu", { text: "trabalho.", className: "text-gradient" }]}
+        />
 
-        <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="relative mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {/* Linha que conecta os passos no desktop */}
+          <div aria-hidden="true" className="absolute left-0 right-0 top-[3.25rem] hidden h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent lg:block" />
           {steps.map((step, index) => (
-            <Reveal key={step.title} delay={0.08 * index}>
-              <SpotlightCard tilt className="h-full rounded-3xl border border-border bg-surface p-6">
-                <span className="font-mono text-xs text-muted">0{index + 1}</span>
-                <step.icon size={22} weight="bold" className="mt-3 text-accent" />
-                <h3 className="mt-4 text-lg font-semibold text-foreground">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{step.description}</p>
+            <Reveal key={step.title} delay={0.1 * index}>
+              <SpotlightCard tilt className="group h-full overflow-hidden rounded-3xl border border-border bg-surface p-6 transition-colors hover:border-accent/40">
+                <span
+                  aria-hidden="true"
+                  className="text-outline pointer-events-none absolute -right-2 -top-6 select-none text-[7rem] font-bold leading-none opacity-40 transition-opacity group-hover:opacity-80"
+                >
+                  {index + 1}
+                </span>
+                <span className="relative flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-accent to-accent-2 text-accent-foreground shadow-lg shadow-accent/20">
+                  <step.icon size={20} weight="bold" />
+                </span>
+                <h3 className="relative mt-6 text-lg font-semibold text-foreground">{step.title}</h3>
+                <p className="relative mt-2 text-sm leading-relaxed text-muted">{step.description}</p>
               </SpotlightCard>
             </Reveal>
           ))}

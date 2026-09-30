@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Outfit, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
+import { CustomCursor } from "@/components/ui/custom-cursor";
+import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { profile } from "@/lib/data";
 import "./globals.css";
 
@@ -30,7 +32,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-screen antialiased">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <ScrollProgress />
           {children}
+          <CustomCursor />
         </ThemeProvider>
         <div aria-hidden="true" className="grain-overlay pointer-events-none fixed inset-0 z-[60]" />
       </body>
