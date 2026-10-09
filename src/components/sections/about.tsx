@@ -57,7 +57,7 @@ export function About() {
             <div className="mt-12 flex flex-wrap items-center gap-3">
               <a
                 href={profile.resumeUrl}
-                download
+                download={profile.resumeFileName}
                 className="group inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background transition-transform active:scale-95"
               >
                 <DownloadSimple size={16} weight="bold" className="transition-transform group-hover:translate-y-0.5" />

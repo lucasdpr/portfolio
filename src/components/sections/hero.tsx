@@ -163,7 +163,7 @@ export function Hero() {
               <Magnetic>
                 <a
                   href={profile.resumeUrl}
-                  download
+                  download={profile.resumeFileName}
                   className="flex items-center gap-2 rounded-full border border-border bg-surface/40 px-7 py-4 text-sm font-semibold text-foreground backdrop-blur transition-colors hover:border-accent hover:text-accent active:scale-95"
                 >
                   <DownloadSimple size={16} weight="bold" />
