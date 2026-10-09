@@ -37,14 +37,22 @@ Para trocar por uma foto real:
    <Image src="/profile.jpg" alt={profile.firstName} fill className="object-cover rounded-[2rem]" />
    ```
 
-## 3. Screenshots dos projetos
+## 3. Projetos
 
-Cada projeto em `data.ts` tem um campo `screenshot` (ex: `/projetos/oms.jpg`).
-Enquanto o arquivo não existir em `public/projetos/`, o card mostra uma arte
-gerada pelo próprio site (um mini-dashboard ou mini-landing). Para usar a
-tela real, é só salvar o print com o mesmo nome. Antes de subir print de
-sistema interno, tire nome da empresa e desfoque valores financeiros.
-Proporção ideal: 16:10 (ex: 1600×1000).
+Cada projeto é um item de `projects` em `src/lib/data.ts`. A ordem da lista
+é a ordem da grade. Campos principais:
+
+- `size`: tamanho do card no desktop: `hero` (grande, 2 linhas), `tall`
+  (estreito, 2 linhas, fica ao lado do `hero`), `wide` (metade da linha) ou
+  `third` (um terço). No celular todos ocupam a largura toda.
+- `accent`: cor do projeto (brilho do card e detalhes do case).
+- `screenshot`: imagem principal; `gallery`: outras telas, mostradas no case.
+  Salve os prints em `public/projetos/`, de preferência em 1600×1000.
+- `problem`, `description`, `highlights` e `stats`: o texto do case.
+- `liveUrl`, `repoUrl` e `note`: links e aviso curto (ex: "Sistema interno").
+
+Clicar num card abre o case com endereço próprio, como `/#projeto-nexus`;
+dá para mandar esse link direto para um recrutador.
 
 ## 4. Currículo em PDF
 

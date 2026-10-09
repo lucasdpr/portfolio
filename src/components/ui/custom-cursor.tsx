@@ -65,7 +65,7 @@ export function CustomCursor() {
       aria-hidden="true"
       data-state="idle"
       style={{ x: ringX, y: ringY, opacity: 0 }}
-      className="group/cursor pointer-events-none fixed left-0 top-0 z-[70] hidden md:block"
+      className="group/cursor pointer-events-none fixed left-0 top-0 z-[95] hidden md:block"
     >
       <div className="flex h-8 w-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-accent/70 transition-[width,height,background-color,border-color] duration-300 ease-out group-data-[state=hover]/cursor:h-14 group-data-[state=hover]/cursor:w-14 group-data-[state=hover]/cursor:bg-accent/10 group-data-[state=label]/cursor:h-20 group-data-[state=label]/cursor:w-20 group-data-[state=label]/cursor:border-accent group-data-[state=label]/cursor:bg-accent">
         <span

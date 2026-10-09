@@ -1,17 +1,22 @@
 import { SectionLabel } from "@/components/ui/scramble-text";
 import { WordReveal } from "@/components/ui/word-reveal";
 import { Reveal } from "@/components/ui/reveal";
-import { ProjectsStack } from "@/components/sections/projects-stack";
+import { ProjectsShowcase } from "@/components/projects/projects-showcase";
 import { projects } from "@/lib/data";
 import { resolvePublicImage } from "@/lib/server-image";
 
 export function Projects() {
-  // A checagem de arquivo roda aqui no servidor; a pilha de cards (efeitos
-  // de rolagem) é client component e recebe o caminho já resolvido.
-  const resolved = projects.map((project) => ({
-    ...project,
-    imageSrc: resolvePublicImage(project.screenshot, ""),
-  }));
+  // A checagem dos arquivos de imagem roda aqui no servidor; a grade e o
+  // case (interativos) são client components e recebem os caminhos prontos.
+  const resolved = projects.map((project) => {
+    const imageSrc = resolvePublicImage(project.screenshot, "");
+    const gallery = (project.gallery ?? []).map((src) => resolvePublicImage(src, "")).filter(Boolean);
+    return { ...project, imageSrc, images: [imageSrc, ...gallery].filter(Boolean) };
+  });
+
+  const systems = projects.filter((project) => project.category === "sistema").length;
+  const sites = projects.filter((project) => project.category === "site").length;
+  const live = projects.filter((project) => project.liveUrl).length;
 
   return (
     <section id="projetos" className="relative border-t border-border py-28">
@@ -26,12 +31,12 @@ export function Projects() {
           </div>
           <Reveal delay={0.1}>
             <p className="max-w-sm text-muted">
-              De sistemas para a manutenção de uma siderúrgica a sites para pequenos negócios.
+              {projects.length} projetos: {systems} sistemas completos e {sites} sites, {live} deles no ar. Toque em um projeto para ver o case.
             </p>
           </Reveal>
         </div>
 
-        <ProjectsStack projects={resolved} />
+        <ProjectsShowcase projects={resolved} />
       </div>
     </section>
   );

@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
 import { INTRO_EVENT, isIntroDone } from "@/lib/intro";
+import { SCROLL_LOCK_EVENT, SCROLL_UNLOCK_EVENT } from "@/lib/scroll-lock";
 
 /**
  * Rolagem suave com inércia (Lenis). Continua sendo a rolagem nativa por
@@ -19,13 +20,22 @@ export function SmoothScroll() {
     function start() {
       lenis.start();
     }
+    function stop() {
+      lenis.stop();
+    }
     if (!isIntroDone()) {
       lenis.stop();
       window.addEventListener(INTRO_EVENT, start, { once: true });
     }
 
+    // Modais (ex: case de projeto) pausam a rolagem da página por baixo.
+    window.addEventListener(SCROLL_LOCK_EVENT, stop);
+    window.addEventListener(SCROLL_UNLOCK_EVENT, start);
+
     return () => {
       window.removeEventListener(INTRO_EVENT, start);
+      window.removeEventListener(SCROLL_LOCK_EVENT, stop);
+      window.removeEventListener(SCROLL_UNLOCK_EVENT, start);
       lenis.destroy();
     };
   }, []);

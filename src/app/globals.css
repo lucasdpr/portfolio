@@ -247,19 +247,3 @@ body {
     animation: none;
   }
 }
-
-/* Pilha de cards dos projetos: só "gruda" (sticky) em telas largas E altas
-   o bastante pro card inteiro caber — senão o fim do card (links) ficaria
-   escondido embaixo da tela. Nas outras, vira uma lista normal. */
-.stack-item + .stack-item {
-  margin-top: 2rem;
-}
-@media (min-width: 1024px) and (min-height: 700px) {
-  .stack-item {
-    position: sticky;
-    height: calc(100svh - 7rem);
-  }
-  .stack-item + .stack-item {
-    margin-top: 0;
-  }
-}
