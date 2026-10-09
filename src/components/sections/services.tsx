@@ -307,7 +307,7 @@ export function Services() {
               icon={<ChartBar size={20} weight="bold" />}
               title="Sistemas completos, do banco à interface"
               description="API REST, banco relacional, painéis com indicadores, auditoria e controle de acesso por perfil."
-              usedIn={["OMS", "Central de Abastecimento"]}
+              usedIn={["NEXUS", "OMS", "Central de Abastecimento"]}
               stack={["FastAPI", "Next.js", "PostgreSQL", "Recharts"]}
               demo={<DashboardDemo />}
             />
@@ -337,9 +337,9 @@ export function Services() {
               horizontal
               icon={<Robot size={20} weight="bold" />}
               title="IA integrada ao sistema"
-              description="Assistente que responde consultando o banco de dados: busca por número de ordem, pedido, material ou fornecedor."
-              usedIn={["Central de Abastecimento"]}
-              stack={["LLM (API compatível com OpenAI)", "PostgreSQL"]}
+              description="Respostas que consultam o banco e citam a fonte: busca em documentos com RAG e assistente que encontra ordens, pedidos e fornecedores."
+              usedIn={["NEXUS", "Central de Abastecimento"]}
+              stack={["RAG", "pgvector", "LLMs", "PostgreSQL"]}
               demo={<ChatDemo />}
             />
           </Reveal>
