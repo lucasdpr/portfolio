@@ -48,8 +48,16 @@ Proporção ideal: 16:10 (ex: 1600×1000).
 
 ## 4. Currículo em PDF
 
-O botão "Baixar currículo" aponta para `/resume.pdf`. Coloque seu currículo
-em `public/resume.pdf` (mesmo nome) para o link funcionar.
+O botão "Baixar currículo" entrega `public/resume.pdf` (baixado com o nome
+`Curriculo-Lucas-Gabriel-Desenvolvedor.pdf`, definido em `profile.resumeFileName`).
+
+O arquivo-fonte fica em [`curriculo/curriculo.html`](curriculo/curriculo.html),
+junto com as fontes. Para atualizar:
+
+1. Edite o texto em `curriculo/curriculo.html`.
+2. Abra o arquivo no Chrome → Imprimir → Destino "Salvar como PDF",
+   Margens "Nenhuma", marque "Gráficos de plano de fundo".
+3. Salve por cima de `public/resume.pdf`. Confira que ficou em 1 página.
 
 ## 5. Formulário de contato
 

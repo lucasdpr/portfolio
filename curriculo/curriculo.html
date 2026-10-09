@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>Lucas Gabriel de Paula Rafael — Desenvolvedor Full Stack Júnior</title>
+<style>
+  @font-face { font-family: "Outfit"; font-weight: 100 900; src: url("outfit-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: "Outfit"; font-weight: 100 900; src: url("outfit-latin-ext.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: "JetBrains Mono"; font-weight: 100 800; src: url("jetbrains-latin.woff2") format("woff2"); }
+
+  @page { size: A4; margin: 0; }
+  :root {
+    --ink: #0f172a;
+    --text: #1f2937;
+    --muted: #556070;
+    --line: #dfe3ea;
+    --accent: #0e7490;
+    --accent-2: #6d28d9;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #fff; }
+  body {
+    font-kerning: none;
+    word-spacing: 0.08em;
+    text-rendering: optimizeSpeed;
+    width: 210mm;
+    min-height: 297mm;
+    padding: 10.5mm 13mm 9mm;
+    font-family: "Outfit", "Liberation Sans", sans-serif;
+    font-size: 9pt;
+    line-height: 1.33;
+    color: var(--text);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  a { color: inherit; text-decoration: none; }
+  .mono { font-family: "JetBrains Mono", monospace; }
+
+  /* Cabeçalho */
+  header { display: flex; justify-content: space-between; align-items: flex-end; gap: 8mm; padding-bottom: 3.2mm; border-bottom: 2px solid var(--ink); }
+  h1 { font-size: 23pt; font-weight: 700; letter-spacing: 0; line-height: 1.05; color: var(--ink); }
+  .role { margin-top: 1.4mm; font-size: 12pt; font-weight: 600; color: var(--accent); }
+  .stack { margin-top: 1.2mm; font-size: 7.6pt; color: var(--muted); }
+  .contact { text-align: right; font-size: 8.3pt; line-height: 1.5; color: var(--text); white-space: nowrap; }
+  .contact b { font-weight: 600; color: var(--ink); }
+  .contact .site { color: var(--accent); font-weight: 600; }
+
+  /* Seções */
+  section { margin-top: 3mm; }
+  h2 {
+    display: flex; align-items: center; gap: 2.5mm;
+    font-size: 9pt; font-weight: 700; letter-spacing: 0; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 1.8mm;
+  }
+  h2::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  .summary { font-size: 9.2pt; color: var(--text); }
+  .summary strong { color: var(--ink); font-weight: 600; }
+
+  /* Projetos */
+  .item { margin-bottom: 2.1mm; break-inside: avoid; }
+  .item:last-child { margin-bottom: 0; }
+  .item-head { display: flex; justify-content: space-between; align-items: baseline; gap: 4mm; }
+  .item-title { font-size: 10pt; font-weight: 700; color: var(--ink); }
+  .item-title .kind { font-weight: 500; color: var(--muted); }
+  .item-date { font-size: 8.2pt; color: var(--muted); white-space: nowrap; }
+  .item-stack { margin-top: 0.4mm; font-size: 7.4pt; color: var(--accent-2); }
+  ul { margin-top: 0.6mm; padding-left: 3.6mm; }
+  li { margin-top: 0.2mm; }
+  li::marker { color: var(--accent); }
+  .metric { font-weight: 600; color: var(--ink); }
+
+  /* Outros projetos */
+  .others { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2mm 6mm; }
+  .others p { font-size: 8.5pt; }
+  .others b { font-weight: 600; color: var(--ink); }
+  .others .t { font-size: 7.2pt; color: var(--muted); }
+
+  /* Competências */
+  .skills { display: grid; grid-template-columns: 34mm 1fr; gap: 0.6mm 3mm; font-size: 8.6pt; }
+  .skills dt { font-weight: 600; color: var(--ink); }
+
+  .two { display: grid; grid-template-columns: 1.35fr 1fr; gap: 8mm; }
+</style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Lucas Gabriel de Paula Rafael</h1>
+      <p class="role">Desenvolvedor Full Stack Júnior</p>
+      <p class="stack mono">Python · FastAPI · Next.js · React · TypeScript · PostgreSQL</p>
+    </div>
+    <div class="contact">
+      <p>Barra Mansa – RJ · <b>(24) 99959-7969</b></p>
+      <p><a href="mailto:lucasgrafael05@gmail.com">lucasgrafael05@gmail.com</a></p>
+      <p><a href="https://www.linkedin.com/in/lucasgabrieldepaula/">linkedin.com/in/lucasgabrieldepaula</a></p>
+      <p><a href="https://github.com/lucasdpr">github.com/lucasdpr</a></p>
+      <p><a class="site" href="https://portfolio-delta-sable-24.vercel.app">portfolio-delta-sable-24.vercel.app</a></p>
+    </div>
+  </header>
+
+  <section>
+    <h2>Resumo</h2>
+    <p class="summary">
+      Desenvolvedor full stack com <strong>sistemas completos publicados</strong>: APIs REST em Python/FastAPI,
+      interfaces em Next.js e TypeScript, PostgreSQL e integração com IA. Construí sistemas para o controle de
+      manutenção de uma siderúrgica, uma plataforma de busca em documentos com IA e sites para clientes.
+      Cursando Engenharia de Software (conclusão em 2027). Disponível para vagas de desenvolvimento júnior,
+      full stack ou back-end.
+    </p>
+  </section>
+
+  <section>
+    <h2>Projetos</h2>
+
+    <div class="item">
+      <div class="item-head">
+        <p class="item-title">NEXUS <span class="kind">· Plataforma de busca em documentos com IA (RAG)</span></p>
+        <p class="item-date">2026 · em desenvolvimento</p>
+      </div>
+      <p class="item-stack mono">Python · FastAPI · SQLAlchemy async · PostgreSQL + pgvector · Next.js · TypeScript · Docker · GitHub Actions</p>
+      <ul>
+        <li>Ingestão de PDF/DOCX com fila no PostgreSQL e worker; busca híbrida (vetorial + textual) com fusão RRF.</li>
+        <li>Respostas da IA citando documento e página, com permissões aplicadas dentro da própria consulta.</li>
+        <li>Multi-tenant com Row-Level Security, sessão em cookie httpOnly, senhas com argon2id e auditoria imutável.</li>
+        <li><span class="metric">Testes de integração com PostgreSQL real</span>, mypy estrito e CI com build Docker e teste de ponta a ponta.</li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <p class="item-title">OMS <span class="kind">· Gestão da manutenção industrial</span></p>
+        <p class="item-date">2025 – 2026</p>
+      </div>
+      <p class="item-stack mono">Python · FastAPI · PostgreSQL (Neon) · Pandas · JavaScript · Three.js · PWA · Render</p>
+      <ul>
+        <li>API REST com <span class="metric">120+ endpoints em 18 módulos</span> e backup diário automático do banco via GitHub Actions.</li>
+        <li>Painel em tempo real do desgaste das peças, sinótico 3D (Three.js) e checklists com laudo em PDF.</li>
+        <li>PWA instalável com cache offline e notificações push, substituindo o registro em papel de inspeções e reparos.</li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <p class="item-title">Central de Abastecimento <span class="kind">· Painel de manutenção sobre o SAP</span></p>
+        <p class="item-date">2026</p>
+      </div>
+      <p class="item-stack mono">Next.js · React · TypeScript · PostgreSQL · Tailwind CSS · Recharts · ExcelJS · Vercel</p>
+      <ul>
+        <li>Importa planilhas do SAP, detecta mudanças entre importações e aponta o que precisa ser cobrado.</li>
+        <li>Dashboard com KPIs e gráficos, exportação para Excel/Power Query, perfis de acesso e notificações push.</li>
+        <li>Assistente de IA que responde consultando o banco por número de ordem, pedido, material ou fornecedor.</li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <p class="item-title">Pass-Line <span class="kind">· App de inspeção que funciona offline</span></p>
+        <p class="item-date">2026</p>
+      </div>
+      <p class="item-stack mono">Next.js · TypeScript · Supabase · Dexie.js (IndexedDB) · Zod · Zustand · pdf-lib</p>
+      <ul>
+        <li>Digitaliza 4 fichas de medição com alerta de tolerância; salva no aparelho e sincroniza quando a conexão volta.</li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <p class="item-title">Economy Bot <span class="kind">· Bot de Discord com painel web</span></p>
+        <p class="item-date">2026</p>
+      </div>
+      <p class="item-stack mono">Node.js · discord.js · Express · EJS · SQLite · OAuth2 · Render</p>
+      <ul>
+        <li>Loja, ranking e banco; site com login via Discord (OAuth2), painel por servidor e plano Premium.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Outros projetos</h2>
+    <div class="others">
+      <p><b>RTS EPI</b> — catálogo digital de EPIs; primeiro projeto vendido como freelancer. <span class="t mono">HTML · CSS · JS · Vercel</span></p>
+      <p><b>Oficina do Ar</b> — site institucional em produção com domínio próprio. <span class="t mono">HTML · CSS · JS</span></p>
+      <p><b>Noctun Tarot</b> — site com tiragem de cartas interativa, carrinho e pedido pelo WhatsApp. <span class="t mono">JavaScript</span></p>
+      <p><b>Portfólio</b> — Next.js com animações e partículas 3D em shader GLSL. <span class="t mono">Next.js · TypeScript · Three.js</span></p>
+      <p><b>Login com Google</b> — autenticação OAuth e rotas em React, publicado na Vercel. <span class="t mono">React · React Router</span></p>
+      <p><b>Biblioteca em Java</b> — sistema de acervo com herança, polimorfismo, interfaces e coleções. <span class="t mono">Java · POO</span></p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Competências</h2>
+    <dl class="skills">
+      <dt>Linguagens</dt><dd>Python, TypeScript, JavaScript, SQL, Java</dd>
+      <dt>Back-end</dt><dd>FastAPI, Pydantic, SQLAlchemy, Node.js, Express, APIs REST, OAuth2, Web Push</dd>
+      <dt>Front-end</dt><dd>React, Next.js, Tailwind CSS, HTML, CSS, PWA (Service Worker, IndexedDB), Three.js</dd>
+      <dt>Dados e IA</dt><dd>PostgreSQL, pgvector, Supabase, Neon, SQLite, MySQL, Pandas, Power BI, RAG, embeddings, LLMs</dd>
+      <dt>DevOps e qualidade</dt><dd>Git, GitHub Actions, Docker, pytest, mypy, ruff, Vercel, Render</dd>
+    </dl>
+  </section>
+
+  <div class="two">
+    <section>
+      <h2>Experiência</h2>
+      <div class="item">
+        <div class="item-head">
+          <p class="item-title">CBSI <span class="kind">· Grupo CSN, Volta Redonda – RJ</span></p>
+          <p class="item-date">03/2024 – atual</p>
+        </div>
+        <p class="item-stack mono" style="color: var(--muted)">Manutenção industrial · lingotamento contínuo</p>
+        <ul>
+          <li>Desenvolvi por iniciativa própria a OMS e o Pass-Line, sistemas para o controle de manutenção da área.</li>
+          <li>Promovido em 9 meses.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Formação e idiomas</h2>
+      <div class="item">
+        <div class="item-head">
+          <p class="item-title">Engenharia de Software</p>
+          <p class="item-date">conclusão 2027</p>
+        </div>
+        <p>Centro Universitário de Barra Mansa (UBM) · 6º período</p>
+      </div>
+      <p style="margin-top: 1.6mm"><b style="color: var(--ink); font-weight: 600">Português</b> nativo · <b style="color: var(--ink); font-weight: 600">Inglês</b> básico, leitura de documentação técnica</p>
+    </section>
+  </div>
+</body>
+</html>

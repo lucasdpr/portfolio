@@ -74,6 +74,8 @@ export const profile = {
   email: "lucasgrafael05@gmail.com",
   whatsapp: "5524999597969",
   resumeUrl: `${BASE_PATH}/resume.pdf`,
+  /** Nome do arquivo quando o recrutador baixa o currículo. */
+  resumeFileName: "Curriculo-Lucas-Gabriel-Desenvolvedor.pdf",
   availableForWork: true,
   /** Tecnologias em destaque no topo da página (o que o recrutador lê primeiro). */
   mainStack: ["Python", "FastAPI", "Next.js", "React", "TypeScript", "PostgreSQL"],
