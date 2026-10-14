@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
-import { List, X } from "@phosphor-icons/react";
+import { List, MagnifyingGlass, X } from "@phosphor-icons/react";
 import { ThemeToggle } from "./theme-toggle";
 import { Magnetic } from "@/components/ui/magnetic-button";
+import { openCommandPalette } from "@/components/ui/command-palette";
 import { profile } from "@/lib/data";
 
 const links = [
@@ -14,6 +15,17 @@ const links = [
   { href: "#skills", label: "Stack" },
   { href: "#trajetoria", label: "Trajetória" },
 ];
+
+const noopSubscribe = () => () => {};
+
+/** "⌘" no Mac, "Ctrl" no resto (só depois de montar, pra não divergir do HTML do servidor). */
+function useShortcutLabel() {
+  return useSyncExternalStore(
+    noopSubscribe,
+    () => (/Mac|iPhone|iPad/.test(navigator.platform) ? "⌘K" : "Ctrl K"),
+    () => "",
+  );
+}
 
 /** Qual seção está no meio da tela agora (pra destacar o link). */
 function useActiveSection() {
@@ -47,6 +59,7 @@ export function Navbar() {
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const active = useActiveSection();
+  const shortcut = useShortcutLabel();
   const { scrollY } = useScroll();
 
   // Esconde ao rolar pra baixo, volta ao rolar pra cima.
@@ -91,12 +104,21 @@ export function Navbar() {
           ))}
         </div>
 
-        <div className="hidden items-center gap-4 md:flex">
+        <div className="hidden items-center gap-3 md:flex">
+          <button
+            type="button"
+            onClick={openCommandPalette}
+            aria-label="Abrir a busca (paleta de comandos)"
+            className="hidden h-9 items-center gap-2 rounded-full border border-border px-3 text-muted transition-colors hover:border-accent hover:text-accent lg:flex"
+          >
+            <MagnifyingGlass size={15} weight="bold" />
+            {shortcut && <kbd className="font-mono text-[10px]">{shortcut}</kbd>}
+          </button>
           <ThemeToggle />
           <Magnetic>
             <a
               href="#contato"
-              className="flex h-10 items-center rounded-full bg-accent px-5 text-sm font-semibold text-accent-foreground transition-transform active:scale-95"
+              className="flex h-10 items-center whitespace-nowrap rounded-full bg-accent px-5 text-sm font-semibold text-accent-foreground transition-transform active:scale-95"
             >
               Falar comigo
             </a>

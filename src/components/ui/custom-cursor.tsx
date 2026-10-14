@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { motion, useMotionValue, useReducedMotion, useSpring } from "motion/react";
+import { motion, useMotionValue, useSpring } from "motion/react";
+import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
 
 const INTERACTIVE = "a, button, input, textarea, select, label, [data-cursor]";
 
@@ -13,7 +14,7 @@ const INTERACTIVE = "a, button, input, textarea, select, label, [data-cursor]";
  * re-renderizar nada a cada movimento.
  */
 export function CustomCursor() {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
   const ringRef = useRef<HTMLDivElement>(null);
   const labelRef = useRef<HTMLSpanElement>(null);
   const x = useMotionValue(-100);

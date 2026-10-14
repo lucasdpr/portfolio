@@ -2,13 +2,14 @@
 
 import { useEffect, useRef, useState, type PointerEvent } from "react";
 import dynamic from "next/dynamic";
-import { AnimatePresence, motion, useInView, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { AnimatePresence, motion, useInView, useScroll, useTransform } from "motion/react";
 import { ArrowDown, ArrowRight, DownloadSimple, GithubLogo, LinkedinLogo } from "@phosphor-icons/react";
 import { Magnetic } from "@/components/ui/magnetic-button";
 import { Reveal } from "@/components/ui/reveal";
 import { WordReveal } from "@/components/ui/word-reveal";
 import { profile, socialLinks } from "@/lib/data";
 import { useIntroDone } from "@/lib/intro";
+import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
 
 const HeroScene = dynamic(
   () => import("@/components/three/hero-scene").then((mod) => mod.HeroScene),
@@ -25,7 +26,7 @@ const rotatingWords = ["sistemas web", "APIs REST", "PWAs offline", "dashboards 
 
 function RotatingWord() {
   const [index, setIndex] = useState(0);
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
 
   useEffect(() => {
     if (reduceMotion) return;
@@ -200,13 +201,13 @@ export function Hero() {
           transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="relative h-[340px] sm:h-[440px] lg:h-[580px]"
         >
-          <HeroScene active={heroVisible} name={profile.firstName} />
+          <HeroScene active={heroVisible} name={profile.firstName} scatter={scrollYProgress} />
         </motion.div>
       </div>
 
       <motion.a
-        href="#sobre"
-        aria-label="Rolar para a próxima seção"
+        href="#projetos"
+        aria-label="Rolar até os projetos"
         style={{ opacity: textOpacity }}
         className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-muted md:flex"
       >

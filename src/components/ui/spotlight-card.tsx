@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef, type PointerEvent, type ReactNode } from "react";
-import { useReducedMotion } from "motion/react";
+import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
+
 
 type SpotlightCardProps = {
   children: ReactNode;
@@ -17,7 +18,7 @@ type SpotlightCardProps = {
  */
 export function SpotlightCard({ children, className = "", tilt = false }: SpotlightCardProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
 
   function handlePointerMove(event: PointerEvent<HTMLDivElement>) {
     const el = ref.current;

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion, useInView } from "motion/react";
 import {
   ChartBar,
   CheckCircle,
@@ -17,6 +17,7 @@ import { WordReveal } from "@/components/ui/word-reveal";
 import { SpotlightCard } from "@/components/ui/spotlight-card";
 import { Counter } from "@/components/ui/counter";
 import { Reveal } from "@/components/ui/reveal";
+import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
 
 /* ---------- Demo 1: painel com barras vivas ---------------------------- */
 
@@ -24,7 +25,7 @@ const barsA = [42, 68, 51, 80, 60, 92, 71, 58, 86, 64, 77, 95];
 const barsB = [55, 48, 73, 62, 88, 70, 83, 66, 59, 91, 68, 80];
 
 function DashboardDemo() {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
   return (
     <div className="flex h-full flex-col gap-3 rounded-2xl border border-border bg-background/70 p-4">
       <div className="grid grid-cols-3 gap-2">
@@ -68,7 +69,7 @@ function DashboardDemo() {
 /* ---------- Demo 2: online/offline + fila de sincronização -------------- */
 
 function OfflineDemo() {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
   const [online, setOnline] = useState(false);
 
   useEffect(() => {
@@ -158,7 +159,7 @@ const answer = "Encontrei 3 pedidos vencidos. O mais antigo está há 12 dias se
 function ChatDemo() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { amount: 0.5 });
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
   // 0: vazio, 1: pergunta, 2: digitando, 3+: resposta sendo escrita
   const [step, setStep] = useState(0);
   const [typed, setTyped] = useState(0);

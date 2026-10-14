@@ -1,7 +1,8 @@
 "use client";
 
 import { Fragment } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
 
 type Word = string | { text: string; className?: string };
 
@@ -20,7 +21,7 @@ type WordRevealProps = {
  * (ex: gradiente).
  */
 export function WordReveal({ words, className = "", delay = 0, as = "h2", play }: WordRevealProps) {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
   const Tag = as === "h1" ? motion.h1 : motion.h2;
   const items = words.map((word) => (typeof word === "string" ? { text: word, className: "" } : word));
   const label = items.map((item) => item.text).join(" ");
