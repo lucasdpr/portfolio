@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { animate, motion } from "motion/react";
-import { finishIntro, isIntroDone } from "@/lib/intro";
+import { finishIntro, isIntroDone, useIntroDone } from "@/lib/intro";
 import { profile } from "@/lib/data";
 
 /**
@@ -14,6 +14,9 @@ export function Preloader() {
   const countRef = useRef<HTMLSpanElement>(null);
   const [leaving, setLeaving] = useState(false);
   const [gone, setGone] = useState(false);
+  // Visita repetida (ou "reduzir movimento"): sai da página logo após a
+  // hidratação, sem depender só do CSS do <html> pra ficar escondida.
+  const introDone = useIntroDone();
 
   useEffect(() => {
     if (isIntroDone()) return;
@@ -31,7 +34,7 @@ export function Preloader() {
     return () => controls.stop();
   }, []);
 
-  if (gone) return null;
+  if (gone || (introDone && !leaving)) return null;
 
   return (
     <motion.div

@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { useReducedMotion } from "motion/react";
+import { useReducedMotion, type MotionValue } from "motion/react";
 import { AdditiveBlending, MathUtils, Vector3, type Group, type ShaderMaterial } from "three";
 
 /* ---------- Formas: cada uma vira um array com `count` pontos ---------- */
@@ -102,6 +102,7 @@ const vertexShader = /* glsl */ `
   uniform float uMorph;
   uniform vec3 uMouse;
   uniform float uMouseStrength;
+  uniform float uScatter;
   uniform float uSize;
   uniform float uPixelRatio;
   attribute vec3 aShape0;
@@ -137,9 +138,20 @@ const vertexShader = /* glsl */ `
     float dist = length(away);
     pos.xy += normalize(away + 0.0001) * smoothstep(0.8, 0.0, dist) * 0.45 * uMouseStrength;
 
+    // Ao rolar pra fora do topo, a forma se desfaz: as partículas se
+    // espalham e vêm na direção da câmera, apagando aos poucos.
+    float scatter = smoothstep(0.0, 1.0, uScatter);
+    pos += dir * scatter * (1.0 + aRandom * 2.2);
+    pos.z = min(pos.z + scatter * aRandom * 2.0, cameraPosition.z - 2.5);
+
     vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
     gl_Position = projectionMatrix * mvPosition;
-    gl_PointSize = uSize * uPixelRatio * (0.55 + aRandom * 0.9) / -mvPosition.z;
+    gl_PointSize = min(uSize * uPixelRatio * (0.55 + aRandom * 0.9) / -mvPosition.z, 48.0 * uPixelRatio);
+
+    // Espalhando, quem chega perto da borda do canvas apaga (sem corte reto).
+    vec2 ndc = gl_Position.xy / gl_Position.w;
+    float edge = smoothstep(0.72, 0.98, max(abs(ndc.x), abs(ndc.y)));
+    float edgeFade = 1.0 - edge * min(1.0, scatter * 4.0);
 
     // Degradê ciano → violeta → rosa (as cores do site) ao longo da forma.
     vec3 cyan = vec3(0.133, 0.827, 0.933);
@@ -147,7 +159,7 @@ const vertexShader = /* glsl */ `
     vec3 pink = vec3(0.957, 0.447, 0.714);
     float g = clamp(pos.x * 0.22 + 0.5 + pos.y * 0.08, 0.0, 1.0);
     vColor = g < 0.5 ? mix(cyan, violet, g * 2.0) : mix(violet, pink, (g - 0.5) * 2.0);
-    vAlpha = 0.55 + aRandom * 0.45;
+    vAlpha = (0.55 + aRandom * 0.45) * (1.0 - scatter * 0.85) * edgeFade;
   }
 `;
 
@@ -164,7 +176,7 @@ const fragmentShader = /* glsl */ `
 const HOLD = 3.2; // segundos parado em cada forma
 const MORPH = 1.6; // segundos de transição
 
-function Particles({ shapes, count }: { shapes: Shapes; count: number }) {
+function Particles({ shapes, count, scatter }: { shapes: Shapes; count: number; scatter?: MotionValue<number> }) {
   const groupRef = useRef<Group>(null);
   const materialRef = useRef<ShaderMaterial>(null);
   const reduceMotion = useReducedMotion();
@@ -194,6 +206,7 @@ function Particles({ shapes, count }: { shapes: Shapes; count: number }) {
       uMorph: { value: 0 },
       uMouse: { value: new Vector3(99, 99, 0) },
       uMouseStrength: { value: 0 },
+      uScatter: { value: 0 },
       uSize: { value: 26 },
       uPixelRatio: { value: 1 },
     }),
@@ -231,6 +244,7 @@ function Particles({ shapes, count }: { shapes: Shapes; count: number }) {
     u.uMouse.value.lerp(mouse, 0.2);
     const inside = hasMouse.current && Math.abs(state.pointer.x) < 1 && Math.abs(state.pointer.y) < 1;
     u.uMouseStrength.value = MathUtils.damp(u.uMouseStrength.value, inside && !reduceMotion ? 1 : 0, 4, delta);
+    u.uScatter.value = MathUtils.damp(u.uScatter.value, reduceMotion ? 0 : Math.min(1, (scatter?.get() ?? 0) * 1.6), 6, delta);
 
     // Inclinação suave seguindo o mouse (pouca, pra não entortar o texto).
     if (!reduceMotion && hasMouse.current) {
@@ -267,9 +281,10 @@ function Particles({ shapes, count }: { shapes: Shapes; count: number }) {
 /**
  * Hero: milhares de partículas que se reorganizam entre uma galáxia, o
  * símbolo "</>" e o nome — e fogem do mouse. Só roda no cliente (WebGL),
- * importado via `next/dynamic({ ssr: false })` em `hero.tsx`.
+ * importado via `next/dynamic({ ssr: false })` em `hero.tsx`. `scatter` é o
+ * progresso da rolagem do topo (0 a 1): a forma se desfaz enquanto ele cresce.
  */
-export function HeroScene({ active = true, name }: { active?: boolean; name: string }) {
+export function HeroScene({ active = true, name, scatter }: { active?: boolean; name: string; scatter?: MotionValue<number> }) {
   const [shapes, setShapes] = useState<Shapes | null>(null);
   const count = useMemo(() => (window.innerWidth < 768 ? 4000 : 9000), []);
 
@@ -301,7 +316,7 @@ export function HeroScene({ active = true, name }: { active?: boolean; name: str
       eventSource={document.body}
       eventPrefix="client"
     >
-      {shapes && <Particles shapes={shapes} count={count} />}
+      {shapes && <Particles shapes={shapes} count={count} scatter={scatter} />}
     </Canvas>
   );
 }

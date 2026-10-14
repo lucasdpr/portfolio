@@ -24,9 +24,6 @@ export type SkillCategory = {
 
 export type ProjectCategory = "sistema" | "site";
 
-/** Tamanho do card na grade de projetos (desktop). No celular todos ocupam a largura toda. */
-export type ProjectSize = "hero" | "tall" | "wide" | "third";
-
 export type Project = {
   /** Identificador curto, usado no endereço do case (ex: #projeto-nexus). */
   slug: string;
@@ -37,12 +34,15 @@ export type Project = {
   category: ProjectCategory;
   year: string;
   tags: string[];
-  /** Cor de destaque do projeto (brilho do card e detalhes do case). */
+  /** Cor de destaque do projeto (luz da vitrine e detalhes do case). */
   accent: string;
-  size: ProjectSize;
   /** Caminho local (ex: "/projetos/oms.jpg") da imagem principal. Se o
-   * arquivo não existir em `public/projetos/`, o card mostra uma arte gerada. */
+   * arquivo não existir em `public/projetos/`, a vitrine mostra uma arte gerada. */
   screenshot?: string;
+  /** Print usado na vitrine dos sistemas, se for diferente do `screenshot`.
+   * Pode ser alto (página inteira): a tela "rola" dentro da janela conforme
+   * a pessoa rola a página. */
+  showcase?: string;
   /** Outras telas do projeto, mostradas na galeria do case. */
   gallery?: string[];
   /** O problema real que o projeto resolveu (aparece antes da solução). */
@@ -150,7 +150,8 @@ export const skillCategories: SkillCategory[] = [
 // `liveUrl`/`repoUrl` ficam de fora quando ainda não há um link público:
 // é melhor não mostrar um botão do que mostrar um que não leva a lugar
 // nenhum. Os sistemas da siderúrgica não têm link de código de propósito:
-// os repositórios citam a empresa. A ordem aqui é a ordem da grade.
+// os repositórios citam a empresa. A ordem aqui é a ordem da vitrine
+// (os sistemas aparecem primeiro, depois os sites).
 export const projects: Project[] = [
   {
     slug: "nexus",
@@ -171,7 +172,6 @@ export const projects: Project[] = [
     year: "2026",
     tags: ["Python", "FastAPI", "SQLAlchemy", "PostgreSQL", "pgvector", "Next.js", "TypeScript", "Docker", "GitHub Actions"],
     accent: "#8b5cf6",
-    size: "hero",
     // Contados no repositório: def test_ em apps/api/tests e etapas do ci.yml.
     stats: [
       { value: "100", label: "testes automatizados" },
@@ -202,7 +202,6 @@ export const projects: Project[] = [
     year: "2025–26",
     tags: ["Python", "FastAPI", "PostgreSQL", "Neon", "Pandas", "JavaScript", "Three.js", "PWA", "Web Push", "Render"],
     accent: "#f59e0b",
-    size: "tall",
     // Contados no repositório da API (routers/*.py) e no README do front.
     stats: [
       { value: "120+", label: "endpoints na API" },
@@ -210,6 +209,7 @@ export const projects: Project[] = [
       { value: "6", label: "veios monitorados" },
     ],
     screenshot: "/projetos/oms-painel.jpg",
+    showcase: "/projetos/oms-painel-completo.jpg",
     gallery: ["/projetos/oms-inspecao.jpg", "/projetos/oms-veios.jpg", "/projetos/oms.jpg"],
     liveUrl: "https://lucasdpr.github.io/oficina-oms/",
   },
@@ -231,7 +231,6 @@ export const projects: Project[] = [
     year: "2026",
     tags: ["Next.js", "React", "TypeScript", "PostgreSQL", "Neon", "Tailwind CSS", "Recharts", "ExcelJS", "IA", "Web Push"],
     accent: "#06b6d4",
-    size: "wide",
     screenshot: "/projetos/abastecimento.jpg",
     note: "Sistema interno · demonstração sob pedido",
   },
@@ -252,7 +251,6 @@ export const projects: Project[] = [
     year: "2026",
     tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase", "Dexie.js", "PWA", "pdf-lib", "Zod", "Zustand"],
     accent: "#10b981",
-    size: "wide",
     screenshot: "/projetos/passe-line.jpg",
     note: "Sistema interno · demonstração sob pedido",
   },
@@ -272,9 +270,9 @@ export const projects: Project[] = [
     year: "2026",
     tags: ["Node.js", "discord.js", "Express", "EJS", "SQLite", "OAuth2", "Render"],
     accent: "#6366f1",
-    size: "third",
     stats: [{ value: "13", label: "comandos de barra" }],
     screenshot: "/projetos/economy-bot.jpg",
+    showcase: "/projetos/economy-bot-completo.jpg",
     gallery: ["/projetos/economy-bot-ranking.jpg"],
     repoUrl: "https://github.com/lucasdpr/economy-bot",
     note: "Prints com dados de demonstração",
@@ -294,7 +292,6 @@ export const projects: Project[] = [
     year: "2026",
     tags: ["HTML5", "CSS3", "JavaScript", "Vercel"],
     accent: "#c8a24a",
-    size: "third",
     screenshot: "/projetos/noctun.jpg",
     liveUrl: "https://noctun.vercel.app/",
     repoUrl: "https://github.com/lucasdpr/Noctun",
@@ -309,7 +306,6 @@ export const projects: Project[] = [
     year: "2025",
     tags: ["HTML5", "CSS3", "JavaScript", "Vercel"],
     accent: "#f97316",
-    size: "third",
     screenshot: "/projetos/rts-epi.jpg",
     liveUrl: "https://rts-epi-frontend.vercel.app/",
     // Repositório encontrado automaticamente a partir da pasta local do
@@ -326,7 +322,6 @@ export const projects: Project[] = [
     year: "2025",
     tags: ["HTML5", "CSS3", "JavaScript"],
     accent: "#0ea5e9",
-    size: "wide",
     screenshot: "/projetos/oficina-do-ar.jpg",
     liveUrl: "https://oficinadoar.xyz",
   },
@@ -340,7 +335,6 @@ export const projects: Project[] = [
     year: "2026",
     tags: ["HTML5", "CSS3", "JavaScript", "GitHub Pages"],
     accent: "#ef4444",
-    size: "wide",
     screenshot: "/projetos/brasa-da-vila.jpg",
     liveUrl: "https://lucasdpr.github.io/Catalogo-de-Apresentacao/",
     note: "Demo de vendas · marca fictícia",

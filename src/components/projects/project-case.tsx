@@ -2,9 +2,10 @@
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { ArrowLeft, ArrowRight, ArrowUpRight, CheckCircle, GithubLogo, LockSimple, X } from "@phosphor-icons/react";
 import type { ResolvedProject } from "@/components/projects/types";
+import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
 
 type ProjectCaseProps = {
   project: ResolvedProject;
@@ -85,7 +86,7 @@ export function ProjectCase({ project, position, onClose, onNavigate }: ProjectC
   const panelRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
   const titleId = `case-${project.slug}-titulo`;
 
   // Foco no botão de fechar ao abrir e ao trocar de projeto; volta ao topo.

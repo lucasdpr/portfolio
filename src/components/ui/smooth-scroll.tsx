@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Lenis from "lenis";
 import { INTRO_EVENT, isIntroDone } from "@/lib/intro";
 import { SCROLL_LOCK_EVENT, SCROLL_UNLOCK_EVENT } from "@/lib/scroll-lock";
+import { SCROLL_TO_EVENT, type ScrollToDetail } from "@/lib/scroll-to";
 
 /**
  * Rolagem suave com inércia (Lenis). Continua sendo a rolagem nativa por
@@ -32,10 +33,19 @@ export function SmoothScroll() {
     window.addEventListener(SCROLL_LOCK_EVENT, stop);
     window.addEventListener(SCROLL_UNLOCK_EVENT, start);
 
+    // Pulos feitos pelo código (ex: capítulos da vitrine de projetos).
+    function scrollTo(event: Event) {
+      const { top } = (event as CustomEvent<ScrollToDetail>).detail;
+      event.preventDefault();
+      lenis.scrollTo(top, { duration: 1.2 });
+    }
+    window.addEventListener(SCROLL_TO_EVENT, scrollTo);
+
     return () => {
       window.removeEventListener(INTRO_EVENT, start);
       window.removeEventListener(SCROLL_LOCK_EVENT, stop);
       window.removeEventListener(SCROLL_UNLOCK_EVENT, start);
+      window.removeEventListener(SCROLL_TO_EVENT, scrollTo);
       lenis.destroy();
     };
   }, []);

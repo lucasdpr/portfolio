@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import type { ReactNode } from "react";
+import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
 
 type RevealProps = {
   children: ReactNode;
@@ -14,7 +15,7 @@ type RevealProps = {
 
 /** Revela o conteúdo com um leve fade + subida ao entrar na viewport. */
 export function Reveal({ children, delay = 0, className = "", y = 24, play }: RevealProps) {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
   const trigger =
     play === undefined
       ? { whileInView: { opacity: 1, y: 0 }, viewport: { once: true, amount: 0.3 } }

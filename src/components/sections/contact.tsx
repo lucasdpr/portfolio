@@ -1,13 +1,14 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { PaperPlaneTilt, LinkedinLogo, WhatsappLogo } from "@phosphor-icons/react";
+import { Copy, PaperPlaneTilt, LinkedinLogo, WhatsappLogo } from "@phosphor-icons/react";
 import { Reveal } from "@/components/ui/reveal";
 import { TechIcon } from "@/components/ui/tech-icon";
 import { SectionLabel } from "@/components/ui/scramble-text";
 import { WordReveal } from "@/components/ui/word-reveal";
 import { profile, socialLinks } from "@/lib/data";
 import { gmailComposeUrl } from "@/lib/contact-links";
+import { copyText } from "@/lib/toast";
 
 type FormState = { name: string; email: string; message: string };
 type FieldErrors = Partial<Record<keyof FormState, string>>;
@@ -62,15 +63,27 @@ export function Contact() {
             Tem um projeto em mente, uma vaga ou só quer trocar uma ideia sobre tecnologia? Me manda uma mensagem.
           </p>
 
-          <a
-            href={`https://wa.me/${profile.whatsapp}?text=${encodeURIComponent("Olá, Lucas! Vi seu portfólio e quero conversar.")}`}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-8 flex h-12 w-fit items-center gap-2 rounded-full bg-accent px-6 text-sm font-semibold text-accent-foreground transition-transform active:scale-95"
-          >
-            <WhatsappLogo size={18} weight="bold" />
-            Chamar no WhatsApp
-          </a>
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <a
+              href={`https://wa.me/${profile.whatsapp}?text=${encodeURIComponent("Olá, Lucas! Vi seu portfólio e quero conversar.")}`}
+              target="_blank"
+              rel="noreferrer"
+              className="flex h-12 w-fit items-center gap-2 rounded-full bg-accent px-6 text-sm font-semibold text-accent-foreground transition-transform active:scale-95"
+            >
+              <WhatsappLogo size={18} weight="bold" />
+              Chamar no WhatsApp
+            </a>
+            {/* Recrutador costuma querer o endereço pra colar no próprio e-mail */}
+            <button
+              type="button"
+              onClick={() => copyText(profile.email, "E-mail copiado")}
+              aria-label={`Copiar o e-mail ${profile.email}`}
+              className="group flex h-12 max-w-full items-center gap-2.5 rounded-full border border-border px-5 font-mono text-[13px] text-foreground/85 transition-colors hover:border-accent hover:text-accent"
+            >
+              <span className="truncate">{profile.email}</span>
+              <Copy size={16} weight="bold" className="shrink-0 text-muted transition-colors group-hover:text-accent" />
+            </button>
+          </div>
 
           <div className="mt-6 flex items-center gap-4">
             {socialLinks

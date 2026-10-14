@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="conteudo" tabIndex={-1} className="outline-none">
         <Hero />
         <Manifesto />
         <Projects />

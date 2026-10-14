@@ -39,19 +39,29 @@ Para trocar por uma foto real:
 
 ## 3. Projetos
 
-Cada projeto é um item de `projects` em `src/lib/data.ts`. A ordem da lista
-é a ordem da grade. Campos principais:
+Cada projeto é um item de `projects` em `src/lib/data.ts`. A `category`
+decide onde ele aparece:
 
-- `size`: tamanho do card no desktop: `hero` (grande, 2 linhas), `tall`
-  (estreito, 2 linhas, fica ao lado do `hero`), `wide` (metade da linha) ou
-  `third` (um terço). No celular todos ocupam a largura toda.
-- `accent`: cor do projeto (brilho do card e detalhes do case).
+- `"sistema"`: entra na vitrine principal. No desktop, a seção fica presa na
+  tela e a rolagem passa de um sistema para o outro (a tela nova sobe como
+  uma cortina); no celular, os cartões se empilham. A ordem da lista é a
+  ordem da vitrine.
+- `"site"`: entra na lista de sites logo abaixo (com prévia que segue o
+  mouse no desktop e miniatura no celular).
+
+Campos principais:
+
+- `accent`: cor do projeto (luz de fundo da vitrine e detalhes do case).
 - `screenshot`: imagem principal; `gallery`: outras telas, mostradas no case.
   Salve os prints em `public/projetos/`, de preferência em 1600×1000.
-- `problem`, `description`, `highlights` e `stats`: o texto do case.
+- `showcase` (opcional): print usado na vitrine no lugar do `screenshot`.
+  Pode ser a página inteira (bem alta): ela rola dentro da janela conforme a
+  pessoa rola a página — é o que acontece na OMS e no Economy Bot.
+- `problem`, `description`, `highlights` e `stats`: o texto do case. Na
+  vitrine aparecem os `stats` (ou, sem eles, os dois primeiros `highlights`).
 - `liveUrl`, `repoUrl` e `note`: links e aviso curto (ex: "Sistema interno").
 
-Clicar num card abre o case com endereço próprio, como `/#projeto-nexus`;
+Clicar num projeto abre o case com endereço próprio, como `/#projeto-nexus`;
 dá para mandar esse link direto para um recrutador.
 
 ## 4. Currículo em PDF
@@ -69,15 +79,14 @@ junto com as fontes. Para atualizar:
 
 ## 5. Formulário de contato
 
-O formulário de contato hoje não tem backend: ao enviar, ele abre o cliente
-de e-mail do visitante já com a mensagem preenchida (via `mailto:`). Funciona
-sem configuração nenhuma, mas depende do visitante ter um app de e-mail
-configurado no aparelho dele.
+O formulário de contato hoje não tem backend: ao enviar, ele abre a tela de
+nova mensagem do Gmail numa aba, já preenchida (`src/lib/contact-links.ts`).
+Funciona sem configuração nenhuma e não depende de app de e-mail instalado.
+Ao lado do botão do WhatsApp há também um botão que copia o e-mail.
 
-Se no futuro você quiser receber as mensagens direto (sem depender do app de
-e-mail do visitante), dá para trocar por um serviço como
-[Resend](https://resend.com) ou [Formspree](https://formspree.io) numa API
-route do Next.js — me chama quando quiser fazer essa parte.
+Se no futuro você quiser receber as mensagens direto, dá para trocar por um
+serviço como [Resend](https://resend.com) ou [Formspree](https://formspree.io)
+numa API route do Next.js.
 
 ## 6. Cores e fontes
 
@@ -93,8 +102,19 @@ route do Next.js — me chama quando quiser fazer essa parte.
   Para tirar, remova `<Preloader />` de `src/app/layout.tsx`.
 - Rolagem suave: `src/components/ui/smooth-scroll.tsx` (Lenis).
 - Frase do manifesto: `src/components/sections/manifesto.tsx`.
-- Partículas do topo (galáxia → `</>` → seu nome): `src/components/three/hero-scene.tsx`.
+- Partículas do topo (galáxia → `</>` → seu nome, e se desfazem ao rolar): `src/components/three/hero-scene.tsx`.
+- Vitrine dos sistemas: `src/components/projects/project-theater.tsx` (desktop)
+  e `project-stack.tsx` (celular); lista de sites: `sites-list.tsx`.
+- Paleta de comandos (⌘K / Ctrl+K, ou a lupa no menu): `src/components/ui/command-palette.tsx`.
 - Todos os efeitos respeitam "reduzir movimento" do sistema operacional.
+
+## 7.1. Prévia do link e busca
+
+- A imagem que aparece quando o link é compartilhado (LinkedIn, WhatsApp) é
+  gerada por `src/app/opengraph-image.tsx`, com as fontes de `assets/og/`.
+- O endereço do site usado nos metadados vem de `src/lib/site-url.ts` (na
+  Vercel ele é detectado sozinho, inclusive se você ligar um domínio próprio).
+- `src/app/robots.ts` e `src/app/sitemap.ts` ajudam o Google a indexar o site.
 
 ## 8. Rodando o projeto
 

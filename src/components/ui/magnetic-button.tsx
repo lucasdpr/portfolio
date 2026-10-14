@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef, type PointerEvent, type ReactNode } from "react";
-import { motion, useMotionValue, useSpring, useReducedMotion } from "motion/react";
+import { motion, useMotionValue, useSpring } from "motion/react";
+import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
 
 type MagneticProps = {
   children: ReactNode;
@@ -16,7 +17,7 @@ type MagneticProps = {
  */
 export function Magnetic({ children, className = "", strength = 0.3 }: MagneticProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const springX = useSpring(x, { stiffness: 150, damping: 15, mass: 0.2 });
